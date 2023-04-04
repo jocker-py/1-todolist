@@ -56,6 +56,17 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
     const text = e.currentTarget.value;
     setText(text);
   };
+  const addTask = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const maxId = Math.max(...tasks.map(task => task.id));
+    const newTask = {
+      id: maxId + 1,
+      title: text,
+      isDone: false,
+    };
+    setTasksList([...tasksList, newTask]);
+    setText("");
+  };
   const tasksElements = filteredTasks.map(task => {
     return <Task key={task.id}
                  id={task.id}
@@ -72,7 +83,7 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
       <h3>{title1}</h3>
       <div>
         <input value={text} onChange={changeInputText}/>
-        <button>+</button>
+        <button onClick={addTask}>+</button>
       </div>
       <ul>
         {tasksElements}
