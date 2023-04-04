@@ -19,6 +19,7 @@ enum FilterType {
   active = "ACTIVE",
   completed = "COMPLETED",
   three = "THREE",
+  delete = "DELETE ALL",
 }
 
 export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
@@ -36,6 +37,8 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
           return task.isDone;
         case FilterType.three:
           return idx < 3;
+        case FilterType.delete:
+          return false;
         default:
           return true;
       }
@@ -69,6 +72,9 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
       <ul>
         {tasksElements}
       </ul>
+      <div>
+        <Button callback={() => changeFilter(FilterType.delete)} name={FilterType.delete}/>
+      </div>
       <div>
         <Button callback={() => changeFilter(FilterType.all)} name={FilterType.all}/>
         <Button callback={() => changeFilter(FilterType.active)} name={FilterType.active}/>
