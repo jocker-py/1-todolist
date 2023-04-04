@@ -25,6 +25,7 @@ enum FilterType {
 export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
   const [filter, setFilter] = useState<FilterType>(FilterType.all);
   const [tasksList, setTasksList] = useState<Array<TaskType>>(tasks);
+  const [text, setText] = useState<string>("");
   const changeFilter = (value: string) => {
     setFilter(value as FilterType);
   };
@@ -51,6 +52,10 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
     const updatedTasks = [...tasksList].map(task => task.id === id ? {...task, isDone: !task.isDone} : task);
     setTasksList(updatedTasks);
   };
+  const changeInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const text = e.currentTarget.value;
+    setText(text);
+  };
   const tasksElements = filteredTasks.map(task => {
     return <Task key={task.id}
                  id={task.id}
@@ -66,7 +71,7 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
       <h3>{title}</h3>
       <h3>{title1}</h3>
       <div>
-        <input/>
+        <input value={text} onChange={changeInputText}/>
         <button>+</button>
       </div>
       <ul>
