@@ -38,12 +38,13 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
           return task.isDone;
         case FilterType.three:
           return idx < 3;
-        case FilterType.delete:
-          return false;
         default:
           return true;
       }
     });
+  const deleteAllTasks = () => {
+    setTasksList([]);
+  };
   const removeTask = (id: TaskType["id"]) => {
     const updatedTasks = [...tasksList].filter(task => task.id !== id);
     setTasksList(updatedTasks);
@@ -89,7 +90,7 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
         {tasksElements}
       </ul>
       <div>
-        <Button callback={() => changeFilter(FilterType.delete)} name={FilterType.delete}/>
+        <Button callback={deleteAllTasks} name={"DELETE ALL"}/>
       </div>
       <div>
         <Button callback={() => changeFilter(FilterType.all)} name={FilterType.all}/>
