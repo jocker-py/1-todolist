@@ -15,24 +15,27 @@ type TodoListType = {
 }
 
 enum FilterType {
-  ALL = "All",
-  ACTIVE = "Active",
-  COMPLETED = "Completed",
+  all = "ALL",
+  active = "ACTIVE",
+  completed = "COMPLETED",
+  three = "THREE",
 }
 
 export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
-  const [filter, setFilter] = useState<FilterType>(FilterType.ALL);
+  const [filter, setFilter] = useState<FilterType>(FilterType.all);
   const [tasksList, setTasksList] = useState<Array<TaskType>>(tasks);
   const changeFilter = (value: string) => {
     setFilter(value as FilterType);
   };
   const filteredTasks = tasksList.filter(
-    (task) => {
+    (task, idx) => {
       switch (filter) {
-        case FilterType.ACTIVE:
+        case FilterType.active:
           return !task.isDone;
-        case FilterType.COMPLETED:
+        case FilterType.completed:
           return task.isDone;
+        case FilterType.three:
+          return idx < 3;
         default:
           return true;
       }
@@ -67,9 +70,10 @@ export const Todolist: FC<TodoListType> = ({title, title1, tasks}) => {
         {tasksElements}
       </ul>
       <div>
-        <Button callback={() => changeFilter(FilterType.ALL)} name={FilterType.ALL}/>
-        <Button callback={() => changeFilter(FilterType.ACTIVE)} name={FilterType.ACTIVE}/>
-        <Button callback={() => changeFilter(FilterType.COMPLETED)} name={FilterType.COMPLETED}/>
+        <Button callback={() => changeFilter(FilterType.all)} name={FilterType.all}/>
+        <Button callback={() => changeFilter(FilterType.active)} name={FilterType.active}/>
+        <Button callback={() => changeFilter(FilterType.completed)} name={FilterType.completed}/>
+        <Button callback={() => changeFilter(FilterType.three)} name={FilterType.three}/>
       </div>
     </div>
   );
