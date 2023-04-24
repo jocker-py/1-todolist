@@ -7,7 +7,7 @@ export type FilterValuesType = "all" | "active" | "completed";
 type TodoListType = {
   id: string
   title: string
-  filter: string
+  filter: FilterValuesType
 }
 type TaskType = {
   id: string
@@ -58,9 +58,9 @@ function App() {
     });
   }
 
-  function getFilteredTasks(tasks: Array<TaskType>, filter: FilterValuesType){
-    switch (filter){
-      case 'active':
+  function getFilteredTasks(tasks: Array<TaskType>, filter: FilterValuesType) {
+    switch (filter) {
+      case "active":
         return tasks.filter(t => !t.isDone);
       case "completed":
         return tasks.filter(t => t.isDone);
@@ -68,17 +68,22 @@ function App() {
         return tasks;
     }
   }
-  const filteredTasks = getFilteredTasks(tasks, filter);
+
   return (
     <div className="App">
-      <Todolist title="What to learn"
-                tasks={getFilteredTasks(tasks, filter)}
-                filter={filter}
-                removeTask={removeTask}
-                changeFilter={changeFilter}
-                addTask={addTask}
-                changeTaskStatus={changeTaskStatus}
-      />
+      {
+        todoLists.map(tl => {
+          const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
+          return <Todolist title={tl.title}
+                           tasks={filteredTasks}
+                           filter={tl.filter}
+                           removeTask={removeTask}
+                           changeFilter={changeFilter}
+                           addTask={addTask}
+                           changeTaskStatus={changeTaskStatus}
+          />;
+        })
+      }
     </div>
   );
 }
