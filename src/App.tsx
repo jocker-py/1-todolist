@@ -58,26 +58,21 @@ function App() {
     });
   }
 
-  let [filter, setFilter] = useState<FilterValuesType>("all");
-
-  let tasksForTodolist = tasks;
-
-  if (filter === "active") {
-    tasksForTodolist = tasks.filter(t => t.isDone === false);
+  function getFilteredTasks(tasks: Array<TaskType>, filter: FilterValuesType){
+    switch (filter){
+      case 'active':
+        return tasks.filter(t => !t.isDone);
+      case "completed":
+        return tasks.filter(t => t.isDone);
+      default:
+        return tasks;
+    }
   }
-  if (filter === "completed") {
-    tasksForTodolist = tasks.filter(t => t.isDone === true);
-  }
-
-  function changeFilter(value: FilterValuesType) {
-    setFilter(value);
-  }
-
-
+  const filteredTasks = getFilteredTasks(tasks, filter);
   return (
     <div className="App">
       <Todolist title="What to learn"
-                tasks={tasksForTodolist}
+                tasks={getFilteredTasks(tasks, filter)}
                 filter={filter}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
