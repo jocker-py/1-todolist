@@ -69,15 +69,18 @@ function App() {
     }
   }
 
-  function changeFilter(filter: FilterValuesType, todoListId: string){
+  function changeFilter(filter: FilterValuesType, todoListId: string) {
     setTodoLists(todoLists.map(tl => tl.id === todoListId ? {...tl, filter} : tl));
   }
+
   return (
     <div className="App">
       {
         todoLists.map(tl => {
           const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
-          return <Todolist title={tl.title}
+          return <Todolist key={tl.id}
+                           todoListId={tl.id}
+                           title={tl.title}
                            tasks={filteredTasks}
                            filter={tl.filter}
                            removeTask={removeTask}
