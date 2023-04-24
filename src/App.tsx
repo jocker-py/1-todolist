@@ -14,6 +14,9 @@ type TaskType = {
   title: string
   isDone: boolean
 }
+type TodoListTasksType = {
+  [todoListId: string]: Array<TaskType>
+}
 
 function App() {
   const todoListId_1 = v1();
@@ -22,13 +25,22 @@ function App() {
     {id: todoListId_1, title: "What to Learn", filter: "all"},
     {id: todoListId_2, title: "What to Buy", filter: "all"},
   ]);
-  let [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState<TodoListTasksType>({
+   [todoListId_1] : [
+      {id: v1(), title: "HTML&CSS", isDone: true},
+  {id: v1(), title: "JS", isDone: true},
+  {id: v1(), title: "ReactJS", isDone: false},
+  {id: v1(), title: "Rest API", isDone: false},
+  {id: v1(), title: "GraphQL", isDone: false},
+],
+  [todoListId_2]: [
     {id: v1(), title: "HTML&CSS", isDone: true},
     {id: v1(), title: "JS", isDone: true},
     {id: v1(), title: "ReactJS", isDone: false},
     {id: v1(), title: "Rest API", isDone: false},
     {id: v1(), title: "GraphQL", isDone: false},
-  ]);
+  ]
+  })
 
   function removeTask(id: string) {
     let filteredTasks = tasks.filter(t => t.id != id);
