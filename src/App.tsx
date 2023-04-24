@@ -4,9 +4,15 @@ import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 
 export type FilterValuesType = "all" | "active" | "completed";
+type TodoListType = {
+  id: string
+  title: string
+  filter: string
+}
 
 function App() {
-
+  const todoListId_1 = v1();
+  const todoListId_2 = v1();
   let [tasks, setTasks] = useState([
     {id: v1(), title: "HTML&CSS", isDone: true},
     {id: v1(), title: "JS", isDone: true},
