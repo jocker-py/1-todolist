@@ -1,22 +1,8 @@
 import React, {useState} from "react";
 import "./App.css";
-import {Todolist} from "./Todolist";
 import {v1} from "uuid";
-
-export type FilterValuesType = "all" | "active" | "completed";
-type TodoListType = {
-  id: string
-  title: string
-  filter: FilterValuesType
-}
-export type TaskType = {
-  id: string
-  title: string
-  isDone: boolean
-}
-type TodoListTasksType = {
-  [todoListId: string]: Array<TaskType>
-}
+import {Todolist} from "./components/Todolist";
+import {FilterValuesType, TaskType, TodoListTasksType, TodoListType} from "./types";
 
 function App() {
   const todoListId_1 = v1();
@@ -74,7 +60,7 @@ function App() {
   }
 
   function removeTodoList(todoListId: string) {
-    setTodoLists(todoLists.filter(tl => tl.id !== todoListId))
+    setTodoLists(todoLists.filter(tl => tl.id !== todoListId));
     delete tasks[todoListId];
   }
 
@@ -84,16 +70,16 @@ function App() {
         todoLists.map(tl => {
           const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
           return <Todolist key={tl.id}
-                           todoListId={tl.id}
                            title={tl.title}
-                           tasks={filteredTasks}
                            filter={tl.filter}
+                           todoListId={tl.id}
+                           tasks={filteredTasks}
+
+                           addTask={addTask}
                            removeTask={removeTask}
                            changeFilter={changeFilter}
-                           addTask={addTask}
-                           changeTaskStatus={changeTaskStatus}
                            removeTodoList={removeTodoList}
-          />;
+                           changeTaskStatus={changeTaskStatus}/>;
         })
       }
     </div>
