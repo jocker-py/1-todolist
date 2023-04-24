@@ -9,7 +9,11 @@ type TodoListType = {
   title: string
   filter: string
 }
-
+type TaskType = {
+  id: string
+  title: string
+  isDone: boolean
+}
 function App() {
   const todoListId_1 = v1();
   const todoListId_2 = v1();
