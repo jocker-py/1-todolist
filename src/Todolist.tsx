@@ -43,7 +43,9 @@ export const Todolist: FC<PropsType> = (props) => {
   const onCompletedClickHandler = () => props.changeFilter("completed", props.todoListId);
 
   return <div>
-    <h3>{props.title}</h3>
+    <h3>{props.title}
+      <button onClick={() => props.removeTodoList(props.todoListId)}>x</button>
+    </h3>
     <div>
       <input value={title}
              onChange={onChangeHandler}
