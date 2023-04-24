@@ -9,6 +9,9 @@ type TodoListType = {
   title: string
   filter: string
 }
+type TodoListStateType = {
+  [todoListId: string]: TodoListType
+}
 type TaskType = {
   id: string
   title: string
