@@ -14,9 +14,14 @@ type TaskType = {
   title: string
   isDone: boolean
 }
+
 function App() {
   const todoListId_1 = v1();
   const todoListId_2 = v1();
+  const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
+    {id: todoListId_1, title: "What to Learn", filter: "all"},
+    {id: todoListId_2, title: "What to Buy", filter: "all"},
+  ]);
   let [tasks, setTasks] = useState([
     {id: v1(), title: "HTML&CSS", isDone: true},
     {id: v1(), title: "JS", isDone: true},
