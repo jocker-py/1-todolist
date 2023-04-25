@@ -1,22 +1,33 @@
-import React, {ChangeEvent, KeyboardEvent, FC} from "react";
+import React, {ChangeEvent, KeyboardEvent, FC, useState} from "react";
 
 type AddInputFormPropsType = {
-  value: string
-  error: string
-  onKeyPress: (e: KeyboardEvent<HTMLInputElement>) => void
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
-  addItem: () => void
+  addItem: (title: string) => void
 }
 
-const AddInputForm: FC<AddInputFormPropsType> = ({value, onKeyPress, onChange, error, addItem}) => {
+const AddInputForm: FC<AddInputFormPropsType> = ({addItem}) => {
+  let [text, setText] = useState("");
+  let [error, setError] = useState("");
+  const addItemHandler = () => {
+    if (text.trim()) {
+      addItem(text);
+      setText("");
+    } else {
+      setError("Title is required");
+    }
+  };
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.currentTarget.value);
+  };
+  const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    setError("");
+    e.key === "Enter" && addItemHandler();
+  };
   return (
     <div>
-      <input value={value}
-             onChange={onChange}
-             onKeyPress={onKeyPress}
-             className={error ? "error" : ""}
+      <input value={text} onChange={onChange} onKeyPress={onKeyPress} className={error ? "error" : ""}
       />
-      <button onClick={addItem}>+</button>
+      <button onClick={addItemHandler}>+</button>
+      <h5 className="error-message">{error}</h5>
     </div>
   );
 };
