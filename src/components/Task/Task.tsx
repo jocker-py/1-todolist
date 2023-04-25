@@ -13,7 +13,7 @@ const Task: FC<TasksPropsType> = ({id, title, isDone, onChange, onClick, callbac
   return (
     <li key={id} className={isDone ? "is-done" : ""}>
       <input type="checkbox" checked={isDone} onChange={onChange}/>
-      <EditSpan title={title} updateItem={callback}/>
+      <EditSpan title={title} onChange={callback}/>
       <button onClick={onClick}>x</button>
     </li>
   );
