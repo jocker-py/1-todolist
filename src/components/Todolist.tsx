@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from "react";
 import Task from "./Task/Task";
 import {FilterValuesType, TaskType} from "../types";
-import InputTodoList from "./InputTodolist/InputTodoList";
+import AddInputForm from "./AddInputForm/AddInputForm";
 import HeaderTodoList from "./HeaderTodoList/HeaderTodoList";
 
 type TodolistPropsType = {
@@ -51,10 +51,10 @@ export const Todolist: FC<TodolistPropsType> = ({
 
   const onChangeTodoListTitle = (text: string) => {
     changeTodoListTitle(text, todoListId);
-  }
+  };
   const onRemoveTodoList = () => {
-    removeTodoList(todoListId)
-  }
+    removeTodoList(todoListId);
+  };
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     setError("");
@@ -68,8 +68,8 @@ export const Todolist: FC<TodolistPropsType> = ({
   return (
     <div>
       <HeaderTodoList title={title} updateItem={onChangeTodoListTitle} callback={onRemoveTodoList}/>
-      <InputTodoList value={value} error={error} onChange={onChangeNewTaskText}
-                     onKeyPress={onKeyPress} addTask={addTaskInTodoList}/>
+      <AddInputForm value={value} error={error} onChange={onChangeNewTaskText}
+                    onKeyPress={onKeyPress} addItem={addTaskInTodoList}/>
       <h5 className="error-message">{error}</h5>
       <ul>{
         tasks.map(t => {

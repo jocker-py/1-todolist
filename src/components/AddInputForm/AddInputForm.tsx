@@ -1,14 +1,14 @@
 import React, {ChangeEvent, KeyboardEvent, FC} from "react";
 
-type InputTodoListPropsType = {
+type AddInputFormPropsType = {
   value: string
   error: string
   onKeyPress: (e: KeyboardEvent<HTMLInputElement>) => void
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
-  addTask: () => void
+  addItem: () => void
 }
 
-const InputTodoList: FC<InputTodoListPropsType> = ({value, onKeyPress, onChange, error, addTask}) => {
+const AddInputForm: FC<AddInputFormPropsType> = ({value, onKeyPress, onChange, error, addItem}) => {
   return (
     <div>
       <input value={value}
@@ -16,9 +16,9 @@ const InputTodoList: FC<InputTodoListPropsType> = ({value, onKeyPress, onChange,
              onKeyPress={onKeyPress}
              className={error ? "error" : ""}
       />
-      <button onClick={addTask}>+</button>
+      <button onClick={addItem}>+</button>
     </div>
   );
 };
 
-export default InputTodoList;
+export default AddInputForm;
