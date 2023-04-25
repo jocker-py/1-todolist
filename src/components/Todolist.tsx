@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, KeyboardEvent, useState} from "react";
+import React, {FC} from "react";
 import Task from "./Task/Task";
 import {FilterValuesType, TaskType} from "../types";
 import AddInputForm from "./AddInputForm/AddInputForm";
@@ -12,11 +12,10 @@ type TodolistPropsType = {
   removeTodoList: (todoListId: string) => void
   addTask: (title: string, todoListId: string) => void
   removeTask: (taskId: string, todoListId: string) => void
-  changeTaskStatus: (id: string, todoListId: string) => void
-  changeTodoListTitle: (text: string, todoListId: string) => void
+  changeTaskStatus: (taskId: string, todoListId: string) => void
+  changeTodoListTitle: (title: string, todoListId: string) => void
   changeFilter: (filter: FilterValuesType, todoListId: string) => void
-  changeTaskText: (taskId: string, text: string, todoListId: string) => void
-
+  changeTaskTitle: (taskId: string, text: string, todoListId: string) => void
 }
 
 export const Todolist: FC<TodolistPropsType> = ({
@@ -29,54 +28,38 @@ export const Todolist: FC<TodolistPropsType> = ({
                                                   changeFilter,
                                                   removeTodoList,
                                                   changeTodoListTitle,
-                                                  changeTaskText,
+                                                  changeTaskTitle,
                                                   changeTaskStatus,
                                                 }) => {
 
-  let [value, setValue] = useState("");
-  let [error, setError] = useState("");
-
-  const addTaskInTodoList = () => {
-    if (value.trim()) {
-      addTask(value, todoListId);
-      setValue("");
-    } else {
-      setError("Title is required");
-    }
-  };
-
-  const onChangeNewTaskText = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value);
-  };
-
-  const onChangeTodoListTitle = (text: string) => {
-    changeTodoListTitle(text, todoListId);
+  const onChangeTodoListTitle = (title: string) => {
+    changeTodoListTitle(title, todoListId);
   };
   const onRemoveTodoList = () => {
     removeTodoList(todoListId);
   };
-
-  const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError("");
-    e.key === "Enter" && addTaskInTodoList();
+  const addTaskItem = (text: string) => {
+    addTask(text, todoListId);
   };
-
   const onAllClickHandler = () => changeFilter("all", todoListId);
   const onActiveClickHandler = () => changeFilter("active", todoListId);
   const onCompletedClickHandler = () => changeFilter("completed", todoListId);
 
   return (
     <div>
-      <HeaderTodoList title={title} updateItem={onChangeTodoListTitle} callback={onRemoveTodoList}/>
-      <AddInputForm value={value} error={error} onChange={onChangeNewTaskText}
-                    onKeyPress={onKeyPress} addItem={addTaskInTodoList}/>
-      <h5 className="error-message">{error}</h5>
+      <HeaderTodoList title={title}
+                      onChange={onChangeTodoListTitle}
+                      onClick={onRemoveTodoList}/>
+      <AddInputForm addItem={addTaskItem}/>
       <ul>{
         tasks.map(t => {
-          const onClick = () => removeTask(t.id, todoListId);
-          const onChange = () => changeTaskStatus(t.id, todoListId);
-          const onChangeTaskText = (text: string) => changeTaskText(t.id, text, todoListId);
-          return <Task {...t} onClick={onClick} onChange={onChange} callback={onChangeTaskText}/>;
+          const onRemoveTask = () => removeTask(t.id, todoListId);
+          const onChangeTaskStatus = () => changeTaskStatus(t.id, todoListId);
+          const onChangeTaskTitle = (title: string) => changeTaskTitle(t.id, title, todoListId);
+          return <Task {...t}
+                       onClick={onRemoveTask}
+                       onChange={onChangeTaskStatus}
+                       callback={onChangeTaskTitle}/>;
         })}
       </ul>
       <div>
