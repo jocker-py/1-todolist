@@ -12,6 +12,6 @@ export type TaskType = {
   isDone: boolean
 }
 
-export type TodoListTasksType = {
+export type TasksStateType = {
   [todoListId: string]: Array<TaskType>
 }
