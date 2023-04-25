@@ -3,6 +3,7 @@ import "./App.css";
 import {v1} from "uuid";
 import {Todolist} from "./components/Todolist";
 import {FilterValuesType, TaskType, TasksStateType, TodoListType} from "./types";
+import AddInputForm from "./components/AddInputForm/AddInputForm";
 
 function App() {
   const todoListId_1 = v1();
@@ -71,6 +72,7 @@ function App() {
   function changeTodoListTitle(title: string, todoListsId: string) {
     setTodoLists(todoLists.map(tl => tl.id === todoListsId ? {...tl, title} : tl));
   }
+
   function addTodoList(title: string) {
     const newTodoList: TodoListType = {id: v1(), title, filter: "all"};
     setTodoLists([newTodoList, ...todoLists]);
@@ -79,7 +81,7 @@ function App() {
 
   return (
     <div className="App">
-
+      <AddInputForm addItem={addTodoList}/>
       {
         todoLists.map(tl => {
           const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
