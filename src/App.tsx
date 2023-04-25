@@ -71,6 +71,11 @@ function App() {
   function changeTodoListTitle(title: string, todoListsId: string) {
     setTodoLists(todoLists.map(tl => tl.id === todoListsId ? {...tl, title} : tl));
   }
+  function addTodoList(title: string) {
+    const newTodoList: TodoListType = {id: v1(), title, filter: "all"};
+    setTodoLists([newTodoList, ...todoLists]);
+    setTasks({...tasks, [newTodoList.id]: []});
+  }
 
   return (
     <div className="App">
