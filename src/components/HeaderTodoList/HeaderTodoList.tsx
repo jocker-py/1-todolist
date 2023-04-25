@@ -3,16 +3,15 @@ import EditSpan from "../EditSpan/EditSpan";
 
 type HeaderTodoListPropsType = {
   title: string
-  updateItem: (text: string) => void
-  callback: () => void
+  onChange: (title: string) => void
+  onClick: () => void
 }
 
-
-const HeaderTodoList: FC<HeaderTodoListPropsType> = ({title, callback, updateItem}) => {
+const HeaderTodoList: FC<HeaderTodoListPropsType> = ({title, onClick, onChange}) => {
   return (
     <h3>
-      <EditSpan title={title} updateItem={updateItem}/>
-      <button onClick={callback}>x</button>
+      <EditSpan title={title} onChange={onChange}/>
+      <button onClick={onClick}>x</button>
     </h3>
   );
 };
