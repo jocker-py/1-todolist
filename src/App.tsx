@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./App.css";
 import {v1} from "uuid";
 import {Todolist} from "./components/Todolist";
-import {FilterValuesType, TaskType, TodoListTasksType, TodoListType} from "./types";
+import {FilterValuesType, TaskType, TasksStateType, TodoListType} from "./types";
 
 function App() {
   const todoListId_1 = v1();
@@ -11,7 +11,7 @@ function App() {
     {id: todoListId_1, title: "What to Learn", filter: "all"},
     {id: todoListId_2, title: "What to Buy", filter: "all"},
   ]);
-  const [tasks, setTasks] = useState<TodoListTasksType>({
+  const [tasks, setTasks] = useState<TasksStateType>({
     [todoListId_1]: [
       {id: v1(), title: "HTML&CSS", isDone: true},
       {id: v1(), title: "JS", isDone: true},
@@ -28,19 +28,19 @@ function App() {
     ],
   });
 
-  function removeTask(id: string, todoListId: string) {
-    setTasks({...tasks, [todoListId]: tasks[todoListId].filter(task => task.id !== id)});
+  function removeTask(taskId: string, todoListId: string) {
+    setTasks({...tasks, [todoListId]: tasks[todoListId].filter(task => task.id !== taskId)});
   }
 
   function addTask(title: string, todoListId: string) {
-    let newTask = {id: v1(), title: title, isDone: false};
+    const newTask = {id: v1(), title: title, isDone: false};
     setTasks({...tasks, [todoListId]: [newTask, ...tasks[todoListId]]});
   }
 
-  function changeTaskStatus(id: string, todoListId: string) {
+  function changeTaskStatus(taskId: string, todoListId: string) {
     setTasks({
       ...tasks,
-      [todoListId]: tasks[todoListId].map((task) => task.id === id ? {...task, isDone: !task.isDone} : task),
+      [todoListId]: tasks[todoListId].map((task) => task.id === taskId ? {...task, isDone: !task.isDone} : task),
     });
   }
 
@@ -64,16 +64,17 @@ function App() {
     delete tasks[todoListId];
   }
 
-  function changeTaskText(id: string, text: string, todoListId: string) {
-    setTasks({...tasks, [todoListId]: tasks[todoListId].map((task) => task.id === id ? {...task, title: text} : task)});
+  function changeTaskTitle(taskId: string, title: string, todoListId: string) {
+    setTasks({...tasks, [todoListId]: tasks[todoListId].map((task) => task.id === taskId ? {...task, title} : task)});
   }
 
-  function changeTodoListTitle(text: string, todoListsId: string) {
-    setTodoLists(todoLists.map(tl => tl.id === todoListsId ? {...tl, title: text} : tl));
+  function changeTodoListTitle(title: string, todoListsId: string) {
+    setTodoLists(todoLists.map(tl => tl.id === todoListsId ? {...tl, title} : tl));
   }
 
   return (
     <div className="App">
+
       {
         todoLists.map(tl => {
           const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
@@ -87,7 +88,7 @@ function App() {
                            removeTask={removeTask}
                            changeFilter={changeFilter}
                            removeTodoList={removeTodoList}
-                           changeTaskText={changeTaskText}
+                           changeTaskTitle={changeTaskTitle}
                            changeTaskStatus={changeTaskStatus}
                            changeTodoListTitle={changeTodoListTitle}/>;
         })
