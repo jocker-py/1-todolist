@@ -13,7 +13,10 @@ type TodolistPropsType = {
   addTask: (title: string, todoListId: string) => void
   removeTask: (taskId: string, todoListId: string) => void
   changeTaskStatus: (id: string, todoListId: string) => void
+  changeTodoListTitle: (text: string, todoListId: string) => void
   changeFilter: (filter: FilterValuesType, todoListId: string) => void
+  changeTaskText: (taskId: string, text: string, todoListId: string) => void
+
 }
 
 export const Todolist: FC<TodolistPropsType> = ({
@@ -25,6 +28,8 @@ export const Todolist: FC<TodolistPropsType> = ({
                                                   removeTask,
                                                   changeFilter,
                                                   removeTodoList,
+                                                  changeTodoListTitle,
+                                                  changeTaskText,
                                                   changeTaskStatus,
                                                 }) => {
 
@@ -40,9 +45,16 @@ export const Todolist: FC<TodolistPropsType> = ({
     }
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeNewTaskText = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
   };
+
+  const onChangeTodoListTitle = (text: string) => {
+    changeTodoListTitle(text, todoListId);
+  }
+  const onRemoveTodoList = () => {
+    removeTodoList(todoListId)
+  }
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     setError("");
@@ -55,15 +67,16 @@ export const Todolist: FC<TodolistPropsType> = ({
 
   return (
     <div>
-      <HeaderTodoList title={title} callback={() => removeTodoList(todoListId)}/>
-      <InputTodoList value={value} error={error} onChange={onChange}
+      <HeaderTodoList title={title} updateItem={onChangeTodoListTitle} callback={onRemoveTodoList}/>
+      <InputTodoList value={value} error={error} onChange={onChangeNewTaskText}
                      onKeyPress={onKeyPress} addTask={addTaskInTodoList}/>
       <h5 className="error-message">{error}</h5>
       <ul>{
         tasks.map(t => {
           const onClick = () => removeTask(t.id, todoListId);
           const onChange = () => changeTaskStatus(t.id, todoListId);
-          return <Task {...t} onClick={onClick} onChange={onChange}/>;
+          const onChangeTaskText = (text: string) => changeTaskText(t.id, text, todoListId);
+          return <Task {...t} onClick={onClick} onChange={onChange} callback={onChangeTaskText}/>;
         })}
       </ul>
       <div>
