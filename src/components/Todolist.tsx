@@ -3,7 +3,7 @@ import Task from "./Task/Task";
 import {FilterValuesType, TaskType} from "../types";
 import AddInputForm from "./AddInputForm/AddInputForm";
 import HeaderTodoList from "./HeaderTodoList/HeaderTodoList";
-import {Stack, IconButton, Tooltip} from "@mui/material";
+import {Stack, IconButton, Tooltip, Divider} from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
@@ -57,7 +57,8 @@ export const Todolist: FC<TodolistPropsType> = ({
                       onChange={onChangeTodoListTitle}
                       onClick={onRemoveTodoList}/>
       <AddInputForm addItem={addTaskItem} title={"Task"}/>
-      <ul>{
+      <Stack direction="column"
+             divider={<Divider orientation="horizontal" flexItem/>}>{
         tasks.map(t => {
           const onRemoveTask = () => removeTask(t.id, todoListId);
           const onChangeTaskStatus = () => changeTaskStatus(t.id, todoListId);
@@ -67,7 +68,7 @@ export const Todolist: FC<TodolistPropsType> = ({
                        onChange={onChangeTaskStatus}
                        callback={onChangeTaskTitle}/>;
         })}
-      </ul>
+      </Stack>
       <Stack direction="row"
              justifyContent="center"
              alignItems="center"
