@@ -6,20 +6,20 @@ type AddInputFormPropsType = {
 
 const AddInputForm: FC<AddInputFormPropsType> = ({addItem}) => {
   let [text, setText] = useState("");
-  let [error, setError] = useState("");
+  let [error, setError] = useState(false);
   const addItemHandler = () => {
     if (text.trim()) {
       addItem(text);
       setText("");
     } else {
-      setError("Title is required");
+      setError(true);
     }
   };
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.currentTarget.value);
   };
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError("");
+    setError(false);
     e.key === "Enter" && addItemHandler();
   };
   return (
