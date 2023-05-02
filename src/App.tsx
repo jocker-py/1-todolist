@@ -87,19 +87,21 @@ function App() {
         {
           todoLists.map(tl => {
             const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
-            return <Todolist key={tl.id}
-                             title={tl.title}
-                             filter={tl.filter}
-                             todoListId={tl.id}
-                             tasks={filteredTasks}
+            return <Grid item xs={3}>
+              <Todolist key={tl.id}
+                        title={tl.title}
+                        filter={tl.filter}
+                        todoListId={tl.id}
+                        tasks={filteredTasks}
 
-                             addTask={addTask}
-                             removeTask={removeTask}
-                             changeFilter={changeFilter}
-                             removeTodoList={removeTodoList}
-                             changeTaskTitle={changeTaskTitle}
-                             changeTaskStatus={changeTaskStatus}
-                             changeTodoListTitle={changeTodoListTitle}/>;
+                        addTask={addTask}
+                        removeTask={removeTask}
+                        changeFilter={changeFilter}
+                        removeTodoList={removeTodoList}
+                        changeTaskTitle={changeTaskTitle}
+                        changeTaskStatus={changeTaskStatus}
+                        changeTodoListTitle={changeTodoListTitle}/>;
+            </Grid>;
           })
         }
       </Grid>
