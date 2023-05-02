@@ -17,7 +17,7 @@ const HeaderTodoList: FC<HeaderTodoListPropsType> = ({title, variant, weight, on
     <Stack direction="row"
            alignItems="center"
            justifyContent="center">
-      <EditSpan title={title} onChange={onChange}/>
+      <EditSpan title={title} onChange={onChange} variant={variant} weight={weight}/>
       <Tooltip title="Remove Todolist">
         <IconButton size="small">
           <DeleteIcon fontSize="small" onClick={onClick}/>
