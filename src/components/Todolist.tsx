@@ -3,7 +3,7 @@ import Task from "./Task/Task";
 import {FilterValuesType, TaskType} from "../types";
 import AddInputForm from "./AddInputForm/AddInputForm";
 import HeaderTodoList from "./HeaderTodoList/HeaderTodoList";
-import {IconButton, Tooltip} from "@mui/material";
+import {Stack, IconButton, Tooltip} from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
@@ -68,7 +68,11 @@ export const Todolist: FC<TodolistPropsType> = ({
                        callback={onChangeTaskTitle}/>;
         })}
       </ul>
-      <div>
+      <Stack direction="row"
+             justifyContent="center"
+             alignItems="center"
+             spacing={2}
+             color="primary">
         <Tooltip title="All Tasks">
           <IconButton size="small"
                       color={filter === "all" ? "primary" : "default"}>
@@ -93,7 +97,7 @@ export const Todolist: FC<TodolistPropsType> = ({
             />
           </IconButton>
         </Tooltip>
-      </div>
+      </Stack>
     </div>
   );
 };
