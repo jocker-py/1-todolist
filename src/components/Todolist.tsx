@@ -57,45 +57,32 @@ export const Todolist: FC<TodolistPropsType> = ({
                       onChange={onChangeTodoListTitle}
                       onClick={onRemoveTodoList}/>
       <AddInputForm addItem={addTaskItem} title={"Task"}/>
-      <Stack direction="column"
-             divider={<Divider orientation="horizontal" flexItem/>}>{
-        tasks.map(t => {
-          const onRemoveTask = () => removeTask(t.id, todoListId);
-          const onChangeTaskStatus = () => changeTaskStatus(t.id, todoListId);
-          const onChangeTaskTitle = (title: string) => changeTaskTitle(t.id, title, todoListId);
-          return <Task {...t}
-                       onClick={onRemoveTask}
-                       onChange={onChangeTaskStatus}
-                       callback={onChangeTaskTitle}/>;
-        })}
+      <Stack direction="column" divider={<Divider orientation="horizontal" flexItem/>}>
+        {
+          tasks.map(t => {
+            const onRemoveTask = () => removeTask(t.id, todoListId);
+            const onChangeTaskStatus = () => changeTaskStatus(t.id, todoListId);
+            const onChangeTaskTitle = (title: string) => changeTaskTitle(t.id, title, todoListId);
+            return <Task {...t}
+                         onClick={onRemoveTask}
+                         onChange={onChangeTaskStatus}
+                         callback={onChangeTaskTitle}/>;
+          })}
       </Stack>
-      <Stack direction="row"
-             justifyContent="center"
-             alignItems="center"
-             spacing={2}
-             color="primary">
+      <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} color="primary">
         <Tooltip title="All Tasks">
-          <IconButton size="small"
-                      color={filter === "all" ? "primary" : "default"}>
-            <LayersIcon fontSize="medium"
-                        onClick={onAllClickHandler}
-            />
+          <IconButton size="small" color={filter === "all" ? "primary" : "default"}>
+            <LayersIcon fontSize="medium" onClick={onAllClickHandler}/>
           </IconButton>
         </Tooltip>
         <Tooltip title="Active Tasks">
-          <IconButton size="small"
-                      color={filter === "active" ? "primary" : "default"}>
-            <TimelapseIcon fontSize="medium"
-                           onClick={onActiveClickHandler}
-            />
+          <IconButton size="small" color={filter === "active" ? "primary" : "default"}>
+            <TimelapseIcon fontSize="medium" onClick={onActiveClickHandler}/>
           </IconButton>
         </Tooltip>
         <Tooltip title="Completed Tasks">
-          <IconButton size="small"
-                      color={filter === "completed" ? "primary" : "default"}>
-            <TaskAltIcon fontSize="medium"
-                         onClick={onCompletedClickHandler}
-            />
+          <IconButton size="small" color={filter === "completed" ? "primary" : "default"}>
+            <TaskAltIcon fontSize="medium" onClick={onCompletedClickHandler}/>
           </IconButton>
         </Tooltip>
       </Stack>
