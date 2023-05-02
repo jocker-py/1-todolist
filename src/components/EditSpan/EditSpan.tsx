@@ -8,15 +8,21 @@ type EditSpanPropsType = {
 const EditSpan: FC<EditSpanPropsType> = ({title, onChange}) => {
   const [text, setText] = useState("");
   const [editMode, setEditMode] = useState(false);
+  const [error, setError] = useState(false);
   const activeEditMode = () => {
     setText(title);
     setEditMode(true);
   };
   const activeViewMode = () => {
-    setEditMode(false);
-    onChange(text);
+    if (text.trim()) {
+      setEditMode(false);
+      onChange(text);
+    } else {
+      setError(true);
+    }
   };
   const changeText = (e: ChangeEvent<HTMLInputElement>) => {
+    setError(false);
     setText(e.target.value);
   };
   return (
