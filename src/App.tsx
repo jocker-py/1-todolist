@@ -67,7 +67,10 @@ function App() {
   }
 
   function changeTaskTitle(taskId: string, title: string, todoListId: string) {
-    setTasks({...tasks, [todoListId]: tasks[todoListId].map((task) => task.id === taskId ? {...task, title} : task)});
+    setTasks({
+      ...tasks,
+      [todoListId]: tasks[todoListId].map((task) => task.id === taskId ? {...task, title} : task),
+    });
   }
 
   function changeTodoListTitle(title: string, todoListsId: string) {
