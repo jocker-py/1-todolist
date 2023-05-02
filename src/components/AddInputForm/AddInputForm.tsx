@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, FC, useState} from "react";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import {IconButton, TextField, Tooltip} from "@mui/material";
+import {IconButton, Stack, TextField, Tooltip} from "@mui/material";
 
 type AddInputFormPropsType = {
   title: string
@@ -26,7 +26,11 @@ const AddInputForm: FC<AddInputFormPropsType> = ({title, addItem}) => {
     e.key === "Enter" && addItemHandler();
   };
   return (
-    <div>
+    <Stack direction="row"
+           justifyContent="center"
+           alignItems={error ? "flex-start" : "center"}
+           style={{paddingLeft: "10px"}}
+    >
       <TextField type="text"
                  size="small"
                  variant="outlined"
@@ -43,7 +47,7 @@ const AddInputForm: FC<AddInputFormPropsType> = ({title, addItem}) => {
                       fontSize="large"/>
         </IconButton>
       </Tooltip>
-    </div>
+    </Stack>
   );
 };
 
