@@ -28,7 +28,6 @@ const AddInputForm: FC<AddInputFormPropsType> = ({title, addItem}) => {
       <input value={text} onChange={onChange} onKeyPress={onKeyPress} className={error ? "error" : ""}
       />
       <button onClick={addItemHandler}>+</button>
-      <h5 className="error-message">{error}</h5>
     </div>
   );
 };
