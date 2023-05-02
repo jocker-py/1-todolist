@@ -52,7 +52,7 @@ export const Todolist: FC<TodolistPropsType> = ({
                       weight={"bold"}
                       onChange={onChangeTodoListTitle}
                       onClick={onRemoveTodoList}/>
-      <AddInputForm addItem={addTaskItem}/>
+      <AddInputForm addItem={addTaskItem} title={"Task"}/>
       <ul>{
         tasks.map(t => {
           const onRemoveTask = () => removeTask(t.id, todoListId);
