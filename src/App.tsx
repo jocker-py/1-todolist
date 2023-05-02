@@ -81,7 +81,7 @@ function App() {
 
   return (
     <div className="App">
-      <AddInputForm addItem={addTodoList}/>
+      <AddInputForm addItem={addTodoList} title="TodoList"/>
       {
         todoLists.map(tl => {
           const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
