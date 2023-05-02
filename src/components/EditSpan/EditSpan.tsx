@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FC, useState} from "react";
-import {TextField} from "@mui/material";
+import {TextField, Typography} from "@mui/material";
 import {Variant} from "@mui/material/styles/createTypography";
 
 
@@ -43,7 +43,9 @@ const EditSpan: FC<EditSpanPropsType> = ({title, onChange, variant, weight = "no
                  onChange={changeText}
                  onBlur={activeViewMode}
                  autoFocus/> :
-      <span onDoubleClick={activeEditMode}>{title}</span>);
+      <Typography onDoubleClick={activeEditMode}
+                  fontWeight={weight}
+                  variant={variant}>{title}</Typography>)
 };
 
 export default EditSpan;
