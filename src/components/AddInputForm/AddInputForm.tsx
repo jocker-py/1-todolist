@@ -1,4 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, FC, useState} from "react";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import {IconButton, Tooltip} from "@mui/material";
 
 type AddInputFormPropsType = {
   title: string
@@ -27,7 +29,13 @@ const AddInputForm: FC<AddInputFormPropsType> = ({title, addItem}) => {
     <div>
       <input value={text} onChange={onChange} onKeyPress={onKeyPress} className={error ? "error" : ""}
       />
-      <button onClick={addItemHandler}>+</button>
+      <Tooltip title={`Add ${title}`}>
+        <IconButton size="medium">
+          <AddBoxIcon onClick={addItemHandler}
+                      color="primary"
+                      fontSize="large"/>
+        </IconButton>
+      </Tooltip>
     </div>
   );
 };
