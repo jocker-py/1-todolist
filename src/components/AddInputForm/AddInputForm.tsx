@@ -1,10 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, FC, useState} from "react";
 
 type AddInputFormPropsType = {
+  title: string
   addItem: (title: string) => void
 }
 
-const AddInputForm: FC<AddInputFormPropsType> = ({addItem}) => {
+const AddInputForm: FC<AddInputFormPropsType> = ({title, addItem}) => {
   let [text, setText] = useState("");
   let [error, setError] = useState(false);
   const addItemHandler = () => {
