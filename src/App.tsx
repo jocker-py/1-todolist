@@ -4,6 +4,7 @@ import {v1} from "uuid";
 import {Todolist} from "./components/Todolist";
 import {FilterValuesType, TaskType, TasksStateType, TodoListType} from "./types";
 import AddInputForm from "./components/AddInputForm/AddInputForm";
+import {Grid} from "@mui/material";
 
 function App() {
   const todoListId_1 = v1();
@@ -82,24 +83,26 @@ function App() {
   return (
     <div className="App">
       <AddInputForm addItem={addTodoList} title="TodoList"/>
-      {
-        todoLists.map(tl => {
-          const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
-          return <Todolist key={tl.id}
-                           title={tl.title}
-                           filter={tl.filter}
-                           todoListId={tl.id}
-                           tasks={filteredTasks}
+      <Grid container spacing={2} style={{padding: "50px"}}>
+        {
+          todoLists.map(tl => {
+            const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
+            return <Todolist key={tl.id}
+                             title={tl.title}
+                             filter={tl.filter}
+                             todoListId={tl.id}
+                             tasks={filteredTasks}
 
-                           addTask={addTask}
-                           removeTask={removeTask}
-                           changeFilter={changeFilter}
-                           removeTodoList={removeTodoList}
-                           changeTaskTitle={changeTaskTitle}
-                           changeTaskStatus={changeTaskStatus}
-                           changeTodoListTitle={changeTodoListTitle}/>;
-        })
-      }
+                             addTask={addTask}
+                             removeTask={removeTask}
+                             changeFilter={changeFilter}
+                             removeTodoList={removeTodoList}
+                             changeTaskTitle={changeTaskTitle}
+                             changeTaskStatus={changeTaskStatus}
+                             changeTodoListTitle={changeTodoListTitle}/>;
+          })
+        }
+      </Grid>
     </div>
   );
 }
