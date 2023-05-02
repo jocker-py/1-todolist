@@ -48,6 +48,8 @@ export const Todolist: FC<TodolistPropsType> = ({
   return (
     <div>
       <HeaderTodoList title={title}
+                      variant={"h6"}
+                      weight={"bold"}
                       onChange={onChangeTodoListTitle}
                       onClick={onRemoveTodoList}/>
       <AddInputForm addItem={addTaskItem}/>
