@@ -2,8 +2,7 @@ import React, {FC} from "react";
 import {TaskType} from "../../types";
 import EditSpan from "../EditSpan/EditSpan";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {Tooltip, Checkbox, IconButton} from "@mui/material";
-
+import {Stack, Tooltip, Checkbox, IconButton} from "@mui/material";
 
 
 type TasksPropsType = TaskType & {
@@ -14,7 +13,10 @@ type TasksPropsType = TaskType & {
 
 const Task: FC<TasksPropsType> = ({id, title, isDone, onChange, onClick, callback}) => {
   return (
-    <li key={id} className={isDone ? "is-done" : ""}>
+    <Stack key={id}
+           direction="row"
+           alignItems="center"
+           justifyContent="space-between">
       <Tooltip title={isDone ? "Set Active" : "Set Complete"}>
         <Checkbox checked={isDone} onChange={onChange}/>
       </Tooltip>
@@ -24,7 +26,7 @@ const Task: FC<TasksPropsType> = ({id, title, isDone, onChange, onClick, callbac
           <DeleteIcon fontSize="small" onClick={onClick}/>
         </IconButton>
       </Tooltip>
-    </li>
+    </Stack>
   );
 };
 
