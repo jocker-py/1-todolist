@@ -4,7 +4,7 @@ import {v1} from "uuid";
 import {Todolist} from "./components/Todolist";
 import {FilterValuesType, TaskType, TasksStateType, TodoListType} from "./types";
 import AddInputForm from "./components/AddInputForm/AddInputForm";
-import {Grid} from "@mui/material";
+import {Grid, Paper} from "@mui/material";
 
 function App() {
   const todoListId_1 = v1();
@@ -88,19 +88,21 @@ function App() {
           todoLists.map(tl => {
             const filteredTasks = getFilteredTasks(tasks[tl.id], tl.filter);
             return <Grid item xs={3}>
-              <Todolist key={tl.id}
-                        title={tl.title}
-                        filter={tl.filter}
-                        todoListId={tl.id}
-                        tasks={filteredTasks}
+              <Paper elevation={3} style={{padding: "15px 10px", borderRadius: "15px"}}>
+                <Todolist key={tl.id}
+                          title={tl.title}
+                          filter={tl.filter}
+                          todoListId={tl.id}
+                          tasks={filteredTasks}
 
-                        addTask={addTask}
-                        removeTask={removeTask}
-                        changeFilter={changeFilter}
-                        removeTodoList={removeTodoList}
-                        changeTaskTitle={changeTaskTitle}
-                        changeTaskStatus={changeTaskStatus}
-                        changeTodoListTitle={changeTodoListTitle}/>;
+                          addTask={addTask}
+                          removeTask={removeTask}
+                          changeFilter={changeFilter}
+                          removeTodoList={removeTodoList}
+                          changeTaskTitle={changeTaskTitle}
+                          changeTaskStatus={changeTaskStatus}
+                          changeTodoListTitle={changeTodoListTitle}/>
+              </Paper>
             </Grid>;
           })
         }
