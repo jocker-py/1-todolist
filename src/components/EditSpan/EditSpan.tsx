@@ -1,5 +1,7 @@
 import React, {ChangeEvent, FC, useState} from "react";
+import {TextField} from "@mui/material";
 import {Variant} from "@mui/material/styles/createTypography";
+
 
 type EditSpanPropsType = {
   title: string
@@ -30,7 +32,17 @@ const EditSpan: FC<EditSpanPropsType> = ({title, onChange, variant, weight = "no
   };
   return (
     editMode ?
-      <input value={text} onChange={changeText} onBlur={activeViewMode} autoFocus/> :
+      <TextField type="text"
+                 variant="standard"
+                 margin="none"
+                 size="small"
+                 error={error}
+                 helperText={error ? "The field is require" : ""}
+                 label={error ? "Error" : ""}
+                 value={text}
+                 onChange={changeText}
+                 onBlur={activeViewMode}
+                 autoFocus/> :
       <span onDoubleClick={activeEditMode}>{title}</span>);
 };
 
