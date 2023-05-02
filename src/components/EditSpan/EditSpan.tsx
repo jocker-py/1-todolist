@@ -1,11 +1,14 @@
 import React, {ChangeEvent, FC, useState} from "react";
+import {Variant} from "@mui/material/styles/createTypography";
 
 type EditSpanPropsType = {
   title: string
+  variant: Variant
+  weight?: "bold" | "normal"
   onChange: (title: string) => void
 }
 
-const EditSpan: FC<EditSpanPropsType> = ({title, onChange}) => {
+const EditSpan: FC<EditSpanPropsType> = ({title, onChange, variant, weight = "normal"}) => {
   const [text, setText] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState(false);
