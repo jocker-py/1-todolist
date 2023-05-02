@@ -3,6 +3,10 @@ import Task from "./Task/Task";
 import {FilterValuesType, TaskType} from "../types";
 import AddInputForm from "./AddInputForm/AddInputForm";
 import HeaderTodoList from "./HeaderTodoList/HeaderTodoList";
+import {IconButton, Tooltip} from "@mui/material";
+import LayersIcon from "@mui/icons-material/Layers";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import TimelapseIcon from "@mui/icons-material/Timelapse";
 
 type TodolistPropsType = {
   title: string
@@ -65,15 +69,30 @@ export const Todolist: FC<TodolistPropsType> = ({
         })}
       </ul>
       <div>
-        <button onClick={onAllClickHandler}
-                className={filter === "all" ? "active-filter" : ""}>All
-        </button>
-        <button onClick={onActiveClickHandler}
-                className={filter === "active" ? "active-filter" : ""}>Active
-        </button>
-        <button onClick={onCompletedClickHandler}
-                className={filter === "completed" ? "active-filter" : ""}>Completed
-        </button>
+        <Tooltip title="All Tasks">
+          <IconButton size="small"
+                      color={filter === "all" ? "primary" : "default"}>
+            <LayersIcon fontSize="medium"
+                        onClick={onAllClickHandler}
+            />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Active Tasks">
+          <IconButton size="small"
+                      color={filter === "active" ? "primary" : "default"}>
+            <TimelapseIcon fontSize="medium"
+                           onClick={onActiveClickHandler}
+            />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Completed Tasks">
+          <IconButton size="small"
+                      color={filter === "completed" ? "primary" : "default"}>
+            <TaskAltIcon fontSize="medium"
+                         onClick={onCompletedClickHandler}
+            />
+          </IconButton>
+        </Tooltip>
       </div>
     </div>
   );
