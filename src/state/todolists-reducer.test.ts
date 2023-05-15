@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {TodoListType} from "../types";
-import {todolistsReducer} from "./todolists-reducer";
+import {removeTodolist, todolistsReducer} from "./todolists-reducer";
 
 test("should remove first todolist", () => {
   const todolistId_1 = v1();
