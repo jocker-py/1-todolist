@@ -1,6 +1,6 @@
 import {TodoListType} from "../types";
 
-type ActionType = ReturnType<typeof removeTodolist> | ReturnType<typeof changeTodolistTitle>;
+type ActionType = ReturnType<typeof addTodolist> |  ReturnType<typeof removeTodolist> | ReturnType<typeof changeTodolistTitle>;
 
 export const addTodolist = (title: string) => ({type: "ADD_TODOLIST", title} as const);
 export const removeTodolist = (id: string) => ({type: "REMOVE_TODOLIST", id} as const);
