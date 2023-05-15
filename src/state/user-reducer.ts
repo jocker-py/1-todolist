@@ -2,6 +2,7 @@ type StateType = { age: number, name: string, childrenCount: number };
 type ActionType = ReturnType<typeof incrementAge>;
 
 export const incrementAge = () => ({type: "INCREMENT_AGE"} as const);
+export const incrementChildrenCount = () => ({type: "INCREMENT_CHILDREN_COUNT"} as const);
 
 export const userReducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
