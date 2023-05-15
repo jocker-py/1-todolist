@@ -17,3 +17,14 @@ test("should increment only children count", () => {
   expect(endState.childrenCount).toBe(3);
   expect(endState.name).toBe("Dimych");
 });
+
+test("should only change name", () => {
+  const startState = {age: 20, childrenCount: 2, name: "Dimych"};
+  const newName = "Vlad";
+  const action = changeName(newName);
+  const endState = userReducer(startState, action);
+  expect(endState.age).toBe(20);
+  expect(endState.childrenCount).toBe(2);
+  expect(endState.name).toBe(newName);
+  expect(endState.name).toEqual(newName);
+});
