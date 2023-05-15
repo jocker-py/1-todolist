@@ -1,6 +1,10 @@
 import {TodoListType} from "../types";
+import {v1} from "uuid";
 
-type ActionType = ReturnType<typeof addTodolist> |  ReturnType<typeof removeTodolist> | ReturnType<typeof changeTodolistTitle>;
+type ActionType =
+  ReturnType<typeof addTodolist>
+  | ReturnType<typeof removeTodolist>
+  | ReturnType<typeof changeTodolistTitle>;
 
 export const addTodolist = (title: string) => ({type: "ADD_TODOLIST", title} as const);
 export const removeTodolist = (id: string) => ({type: "REMOVE_TODOLIST", id} as const);
@@ -8,6 +12,8 @@ export const changeTodolistTitle = (id: string, title: string) => ({type: "CHANG
 
 export const todolistsReducer = (state: Array<TodoListType>, action: ActionType) => {
   switch (action.type) {
+    case "ADD_TODOLIST":
+      return [...state, {id: v1(), title: action.title, filter: "all"}];
     case "REMOVE_TODOLIST":
       return state.filter(tl => tl.id !== action.id);
     case "CHANGE_TODOLIST_TITLE":
