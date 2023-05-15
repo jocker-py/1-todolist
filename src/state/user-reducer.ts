@@ -1,5 +1,5 @@
 type StateType = { age: number, name: string, childrenCount: number };
-type ActionType = any;
+type ActionType = ReturnType<typeof incrementAge>;
 
 export const incrementAge = () => ({type: "INCREMENT_AGE"} as const);
 
