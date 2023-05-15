@@ -11,6 +11,11 @@ export const userReducer = (state: StateType, action: ActionType) => {
         ...state,
         age: state.age + 1,
       };
+    case "INCREMENT_CHILDREN_COUNT":
+      return {
+        ...state,
+        childrenCount: state.childrenCount + 1,
+      };
     default:
       throw new Error("Unknown action type");
   }
