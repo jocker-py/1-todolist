@@ -6,9 +6,9 @@ export const removeTodolist = (id: string) => ({type: "REMOVE_TODOLIST", id} as 
 
 export const todolistsReducer = (state: Array<TodoListType>, action: ActionType) => {
   switch (action.type) {
-    case "XXX":
-      return state;
+    case "REMOVE_TODOLIST":
+      return state.filter(tl => tl.id !== action.id);
     default:
-      throw new Error("Unknow action type");
+      throw new Error("Unknown action type");
   }
 };
