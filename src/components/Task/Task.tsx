@@ -16,9 +16,10 @@ const Task: FC<TasksPropsType> = ({id, title, isDone, onChange, onClick, callbac
     <Stack key={id}
            direction="row"
            alignItems="center"
-           justifyContent="space-between">
+           justifyContent="space-between"
+           style={isDone ? {"opacity": 0.5} : {}}>
       <Tooltip title={isDone ? "Set Active" : "Set Complete"}>
-        <Checkbox checked={isDone} onChange={onChange}/>
+        <Checkbox checked={isDone} onChange={onChange} color="primary"/>
       </Tooltip>
       <EditSpan title={title} onChange={callback} variant={"body1"}/>
       <Tooltip title="Remove Task">
