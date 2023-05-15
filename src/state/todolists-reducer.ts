@@ -4,7 +4,8 @@ import {v1} from "uuid";
 type ActionType =
   ReturnType<typeof addTodolist>
   | ReturnType<typeof removeTodolist>
-  | ReturnType<typeof changeTodolistTitle>;
+  | ReturnType<typeof changeTodolistTitle>
+  | ReturnType<typeof changeTodolistFilter>;
 
 export const addTodolist = (title: string) => ({type: "ADD_TODOLIST", title} as const);
 export const removeTodolist = (id: string) => ({type: "REMOVE_TODOLIST", id} as const);
