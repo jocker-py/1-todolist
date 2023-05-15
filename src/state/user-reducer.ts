@@ -1,7 +1,8 @@
-import {type} from "@testing-library/user-event/dist/type";
-
 type StateType = { age: number, name: string, childrenCount: number };
-type ActionType = ReturnType<typeof incrementAge> | ReturnType<typeof incrementChildrenCount>;
+type ActionType =
+  ReturnType<typeof incrementAge>
+  | ReturnType<typeof incrementChildrenCount>
+  | ReturnType<typeof changeName>;
 
 export const incrementAge = () => ({type: "INCREMENT_AGE"} as const);
 export const changeName = (name: string) => ({type: "CHANGE_NAME", name} as const);
