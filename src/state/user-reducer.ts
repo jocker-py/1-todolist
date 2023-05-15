@@ -20,6 +20,11 @@ export const userReducer = (state: StateType, action: ActionType) => {
         ...state,
         childrenCount: state.childrenCount + 1,
       };
+    case "CHANGE_NAME":
+      return {
+        ...state,
+        name: action.name,
+      };
     default:
       throw new Error("Unknown action type");
   }
