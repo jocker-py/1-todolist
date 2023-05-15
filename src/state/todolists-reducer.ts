@@ -1,8 +1,8 @@
 import {TodoListType} from "../types";
 
-type ActionType = {type: string};
+type ActionType = ReturnType<typeof removeTodolist>;
 
-export const removeTodolist = (id: string) => ({type: "REMOVE_TODOLIST", id});
+export const removeTodolist = (id: string) => ({type: "REMOVE_TODOLIST", id} as const);
 
 export const todolistsReducer = (state: Array<TodoListType>, action: ActionType) => {
   switch (action.type) {
