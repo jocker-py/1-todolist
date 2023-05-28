@@ -8,13 +8,20 @@ import {
   todolistsReducer,
 } from "./todolists-reducer";
 
-test("should remove first todolist", () => {
-  const todolistId_1 = v1();
-  const todolistId_2 = v1();
-  const startState: Array<TodolistType> = [
+let todolistId_1: string;
+let todolistId_2: string;
+let startState: Array<TodolistType>;
+
+beforeEach(() => {
+  todolistId_1 = v1();
+  todolistId_2 = v1();
+  startState = [
     {id: todolistId_1, title: "What to learn", filter: "all"},
     {id: todolistId_2, title: "What to buy", filter: "all"},
   ];
+});
+
+test("should remove first todolist", () => {
   const action = removeTodolist(todolistId_1);
   const endState = todolistsReducer(startState, action);
   expect(endState.length).toBe(1);
@@ -22,12 +29,6 @@ test("should remove first todolist", () => {
 });
 
 test("should change name of second todolist", () => {
-  const todolistId_1 = v1();
-  const todolistId_2 = v1();
-  const startState: Array<TodolistType> = [
-    {id: todolistId_1, title: "What to learn", filter: "all"},
-    {id: todolistId_2, title: "What to buy", filter: "all"},
-  ];
   const newTodolistTitle = "New todolist";
   const action = changeTodolistTitle(todolistId_2, newTodolistTitle);
   const endState = todolistsReducer(startState, action);
@@ -37,12 +38,6 @@ test("should change name of second todolist", () => {
 });
 
 test("should add new todolist", () => {
-  const todolistId_1 = v1();
-  const todolistId_2 = v1();
-  const startState: Array<TodolistType> = [
-    {id: todolistId_1, title: "What to learn", filter: "all"},
-    {id: todolistId_2, title: "What to buy", filter: "all"},
-  ];
   const newTodolistTitle = "New todolist";
   const action = addTodolist(newTodolistTitle);
   const endState = todolistsReducer(startState, action);
@@ -53,17 +48,8 @@ test("should add new todolist", () => {
 });
 
 test("correct filter of todolist should be changed", () => {
-  let todolistId1 = v1();
-  let todolistId2 = v1();
-
   let newFilter: FilterValuesType = "completed";
-
-  const startState: Array<TodolistType> = [
-    {id: todolistId1, title: "What to learn", filter: "all"},
-    {id: todolistId2, title: "What to buy", filter: "all"},
-  ];
-
-  const action = changeTodolistFilter(todolistId2, newFilter);
+  const action = changeTodolistFilter(todolistId_2, newFilter);
   const endState = todolistsReducer(startState, action);
 
   expect(endState[0].filter).toBe("all");
