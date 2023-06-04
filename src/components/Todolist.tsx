@@ -1,91 +1,56 @@
-import React, {FC} from "react";
+import React, {FC, useCallback, useMemo} from "react";
 import Task from "./Task/Task";
-import {FilterValuesType, TaskType} from "../types";
+import {FilterValuesType, TaskType, TodolistType} from "../types";
 import AddInputForm from "./AddInputForm/AddInputForm";
 import HeaderTodoList from "./HeaderTodoList/HeaderTodoList";
-import {Stack, IconButton, Tooltip, Divider} from "@mui/material";
-import LayersIcon from "@mui/icons-material/Layers";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import TimelapseIcon from "@mui/icons-material/Timelapse";
+import {Stack, Divider} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStoreType} from "../state/store";
+import {changeTodolistTitle, removeTodolist} from "../state/todolists-reducer";
+import {addTask} from "../state/tasks-reducer";
+import ButtonsTodolist from "./ButtonsTodolist/ButtonsTodolist";
 
-type TodolistPropsType = {
-  title: string
-  todoListId: string
-  tasks: Array<TaskType>
-  filter: FilterValuesType
-  removeTodoList: (todoListId: string) => void
-  addTask: (title: string, todoListId: string) => void
-  removeTask: (taskId: string, todoListId: string) => void
-  changeTaskStatus: (taskId: string, todoListId: string) => void
-  changeTodoListTitle: (title: string, todoListId: string) => void
-  changeFilter: (filter: FilterValuesType, todoListId: string) => void
-  changeTaskTitle: (taskId: string, text: string, todoListId: string) => void
-}
+const Todolist: FC<TodolistType> = (todolist) => {
+  const {id, title, filter} = todolist;
+  const tasks = useSelector<AppRootStoreType, Array<TaskType>>(state => state.tasks[id]);
+  const dispatch = useDispatch();
 
-export const Todolist: FC<TodolistPropsType> = ({
-                                                  tasks,
-                                                  title,
-                                                  filter,
-                                                  addTask,
-                                                  todoListId,
-                                                  removeTask,
-                                                  changeFilter,
-                                                  removeTodoList,
-                                                  changeTodoListTitle,
-                                                  changeTaskTitle,
-                                                  changeTaskStatus,
-                                                }) => {
+  const getFilteredTasks = useMemo(() => {
+    return (tasks: Array<TaskType>, filter: FilterValuesType) => {
+      switch (filter) {
+        case "completed":
+          return tasks.filter(task => task.isDone);
+        case "active":
+          return tasks.filter(task => !task.isDone);
+        case "all":
+        default:
+          return tasks;
+      }
+    };
+  }, []);
 
-  const onChangeTodoListTitle = (title: string) => {
-    changeTodoListTitle(title, todoListId);
-  };
-  const onRemoveTodoList = () => {
-    removeTodoList(todoListId);
-  };
-  const addTaskItem = (text: string) => {
-    addTask(text, todoListId);
-  };
-  const onAllClickHandler = () => changeFilter("all", todoListId);
-  const onActiveClickHandler = () => changeFilter("active", todoListId);
-  const onCompletedClickHandler = () => changeFilter("completed", todoListId);
+
+  const onChangeTodolistTitle = useCallback((title: string) =>
+    dispatch(changeTodolistTitle(title, id)), [dispatch, id]);
+
+  const onRemoveTodolist = useCallback(() =>
+    dispatch(removeTodolist(id)), [dispatch, id]);
+
+  const addTaskItem = useCallback((title: string) =>
+    dispatch(addTask(title, id)), [dispatch, id]);
 
   return (
     <div>
-      <HeaderTodoList title={title}
-                      variant={"h6"}
-                      weight={"bold"}
-                      onChange={onChangeTodoListTitle}
-                      onClick={onRemoveTodoList}/>
+      <HeaderTodoList title={title} variant={"h6"} weight={"bold"}
+                      onChange={onChangeTodolistTitle} onClick={onRemoveTodolist}/>
       <AddInputForm addItem={addTaskItem} title={"Task"}/>
       <Stack direction="column" divider={<Divider orientation="horizontal" flexItem/>}>
-        {
-          tasks.map(t => {
-            const onRemoveTask = () => removeTask(t.id, todoListId);
-            const onChangeTaskStatus = () => changeTaskStatus(t.id, todoListId);
-            const onChangeTaskTitle = (title: string) => changeTaskTitle(t.id, title, todoListId);
-            return <Task {...t}
-                         onClick={onRemoveTask}
-                         onChange={onChangeTaskStatus}
-                         callback={onChangeTaskTitle}/>;
-          })}
+        {getFilteredTasks(tasks, filter).map(t => <Task key={t.id} {...t} todolistId={id}/>)}
       </Stack>
-      <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} color="primary">
-        <Tooltip title="All Tasks">
-          <IconButton size="small" color={filter === "all" ? "primary" : "default"}>
-            <LayersIcon fontSize="medium" onClick={onAllClickHandler}/>
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Active Tasks">
-          <IconButton size="small" color={filter === "active" ? "primary" : "default"}>
-            <TimelapseIcon fontSize="medium" onClick={onActiveClickHandler}/>
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Completed Tasks">
-          <IconButton size="small" color={filter === "completed" ? "primary" : "default"}>
-            <TaskAltIcon fontSize="medium" onClick={onCompletedClickHandler}/>
-          </IconButton>
-        </Tooltip>
-      </Stack>
+      <ButtonsTodolist {...todolist} />
     </div>
   );
 };
+
+export default React.memo(Todolist);
+
