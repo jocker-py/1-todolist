@@ -1,7 +1,6 @@
-import React, {ChangeEvent, FC, useState} from "react";
+import React, {ChangeEvent, FC, useCallback, useState} from "react";
 import {TextField, Typography} from "@mui/material";
 import {Variant} from "@mui/material/styles/createTypography";
-
 
 type EditSpanPropsType = {
   title: string
@@ -14,22 +13,25 @@ const EditSpan: FC<EditSpanPropsType> = ({title, onChange, variant, weight = "no
   const [text, setText] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState(false);
-  const activeEditMode = () => {
+  const activeEditMode = useCallback(() => {
     setText(title);
     setEditMode(true);
-  };
-  const activeViewMode = () => {
+  }, [title]);
+
+  const activeViewMode = useCallback(() => {
     if (text.trim()) {
       setEditMode(false);
       onChange(text);
     } else {
       setError(true);
     }
-  };
-  const changeText = (e: ChangeEvent<HTMLInputElement>) => {
+  }, [text, onChange]);
+
+  const changeText = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setError(false);
     setText(e.target.value);
-  };
+  }, []);
+
   return (
     editMode ?
       <TextField type="text"
@@ -45,7 +47,7 @@ const EditSpan: FC<EditSpanPropsType> = ({title, onChange, variant, weight = "no
                  autoFocus/> :
       <Typography onDoubleClick={activeEditMode}
                   fontWeight={weight}
-                  variant={variant}>{title}</Typography>)
+                  variant={variant}>{title}</Typography>);
 };
 
-export default EditSpan;
+export default React.memo(EditSpan);
