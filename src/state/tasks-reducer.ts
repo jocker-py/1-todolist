@@ -1,6 +1,7 @@
 import {TasksStateType} from "../types";
 import {v1} from "uuid";
 import {addTodolist, removeTodolist} from "./todolists-reducer";
+import {Reducer} from "react";
 
 export const removeTask = (taskId: string, todolistId: string) => ({
   type: "REMOVE_TASK", payload: {
@@ -32,14 +33,18 @@ export const changeTaskTitle = (taskId: string, title: string, todolistId: strin
   },
 } as const);
 
-type ActionType = ReturnType<typeof removeTask>
+export type TasksActionsType = ReturnType<typeof removeTask>
   | ReturnType<typeof addTask>
   | ReturnType<typeof changeTaskStatus>
   | ReturnType<typeof changeTaskTitle>
   | ReturnType<typeof addTodolist>
   | ReturnType<typeof removeTodolist>
 
-export const tasksReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
+export type TasksReducerType = Reducer<TasksStateType, TasksActionsType>;
+
+const initialState: TasksStateType = {};
+
+export const tasksReducer = (state = initialState, action: TasksActionsType): TasksStateType => {
   switch (action.type) {
     case "REMOVE_TASK":
       return {
@@ -78,6 +83,6 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
       delete state[action.payload];
       return {...state};
     default:
-      throw new Error("Unknown action type");
+      return state;
   }
 };
