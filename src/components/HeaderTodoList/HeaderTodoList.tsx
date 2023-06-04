@@ -27,4 +27,4 @@ const HeaderTodoList: FC<HeaderTodoListPropsType> = ({title, variant, weight, on
   );
 };
 
-export default HeaderTodoList;
+export default React.memo(HeaderTodoList);
