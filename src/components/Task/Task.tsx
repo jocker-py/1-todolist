@@ -13,11 +13,14 @@ type TasksPropsType = TaskType & {
 
 const Task: FC<TasksPropsType> = ({id, title, isDone, todolistId}) => {
     const dispatch = useDispatch();
-    const onRemoveTask = useCallback(() => dispatch(removeTask(id, todolistId)), [dispatch, id, todolistId]);
-    const onChangeTaskStatus = useCallback((e: React.ChangeEvent<HTMLInputElement>) => (
-      dispatch(changeTaskStatus(id, e.currentTarget.checked, todolistId))
-    ), [dispatch, id, todolistId]);
-    const onChangeTaskTitle = useCallback((title: string) => dispatch(changeTaskTitle(id, title, todolistId)), [dispatch, id, todolistId]);
+    const onRemoveTask = () => dispatch(removeTask(id, todolistId));
+
+    const onChangeTaskStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(changeTaskStatus(id, e.currentTarget.checked, todolistId));
+    };
+    const onChangeTaskTitle = useCallback((title: string) => {
+      dispatch(changeTaskTitle(id, title, todolistId));
+    }, [dispatch, title]);
 
     return (
       <Stack key={id}
