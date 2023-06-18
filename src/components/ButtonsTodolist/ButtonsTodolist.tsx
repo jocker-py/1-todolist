@@ -1,4 +1,4 @@
-import React, {FC, useCallback} from "react";
+import React, {FC} from "react";
 import {IconButton, Stack, Tooltip} from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
@@ -10,9 +10,9 @@ import {TodolistType} from "../../types";
 
 const ButtonsTodolist: FC<TodolistType> = ({id, filter}) => {
   const dispatch = useDispatch();
-  const onAllClickHandler = useCallback(() => dispatch(changeTodolistFilter("all", id)), [dispatch, id]);
-  const onActiveClickHandler = useCallback(() => dispatch(changeTodolistFilter("active", id)), [dispatch, id]);
-  const onCompletedClickHandler = useCallback(() => dispatch(changeTodolistFilter("completed", id)), [dispatch, id]);
+  const onAllClickHandler = () => dispatch(changeTodolistFilter("all", id))
+  const onActiveClickHandler = () => dispatch(changeTodolistFilter("active", id))
+  const onCompletedClickHandler = () => dispatch(changeTodolistFilter("completed", id))
   return (
     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} color="primary">
       <Tooltip title="All Tasks">
