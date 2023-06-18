@@ -1,5 +1,5 @@
-import {v1} from "uuid";
-import {FilterValuesType, TodolistType} from "../types";
+import { v1 } from "uuid";
+import { FilterValuesType, TodolistType } from "../types";
 import {
   addTodolist,
   changeTodolistFilter,
@@ -16,8 +16,8 @@ beforeEach(() => {
   todolistId_1 = v1();
   todolistId_2 = v1();
   startState = [
-    {id: todolistId_1, title: "What to learn", filter: "all"},
-    {id: todolistId_2, title: "What to buy", filter: "all"},
+    { id: todolistId_1, title: "What to learn", filter: "all" },
+    { id: todolistId_2, title: "What to buy", filter: "all" },
   ];
 });
 

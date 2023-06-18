@@ -1,7 +1,12 @@
-import {changeName, incrementAge, incrementChildrenCount, userReducer} from "./user-reducer";
+import {
+  changeName,
+  incrementAge,
+  incrementChildrenCount,
+  userReducer,
+} from "./user-reducer";
 
 test("should increment only age", () => {
-  const startState = {age: 20, childrenCount: 2, name: "Dimych"};
+  const startState = { age: 20, childrenCount: 2, name: "Dimych" };
   const action = incrementAge();
   const endState = userReducer(startState, action);
   expect(endState.age).toBe(21);
@@ -10,7 +15,7 @@ test("should increment only age", () => {
 });
 
 test("should increment only children count", () => {
-  const startState = {age: 20, childrenCount: 2, name: "Dimych"};
+  const startState = { age: 20, childrenCount: 2, name: "Dimych" };
   const action = incrementChildrenCount();
   const endState = userReducer(startState, action);
   expect(endState.age).toBe(20);
@@ -19,7 +24,7 @@ test("should increment only children count", () => {
 });
 
 test("should only change name", () => {
-  const startState = {age: 20, childrenCount: 2, name: "Dimych"};
+  const startState = { age: 20, childrenCount: 2, name: "Dimych" };
   const newName = "Vlad";
   const action = changeName(newName);
   const endState = userReducer(startState, action);
