@@ -1,4 +1,8 @@
-import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
+import {
+  applyMiddleware,
+  combineReducers,
+  legacy_createStore as createStore,
+} from "redux";
 import { todolistsReducer } from "../features/todolistsReducer";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import thunk from "redux-thunk";
