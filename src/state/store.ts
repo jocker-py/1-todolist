@@ -1,18 +1,23 @@
-import {tasksReducer} from './tasks-reducer';
-import {todolistsReducer} from './todolists-reducer';
-import {combineReducers, createStore} from 'redux';
+import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
+import { todolistsReducer } from "../features/todolistsReducer";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import thunk from "redux-thunk";
+import { tasksReducer } from "../features/tasksReducer";
 
-// объединяя reducer-ы с помощью combineReducers,
-// мы задаём структуру нашего единственного объекта-состояния
+// root
 const rootReducer = combineReducers({
-    tasks: tasksReducer,
-    todolists: todolistsReducer
-})
-// непосредственно создаём store
-export const store = createStore(rootReducer);
-// определить автоматически тип всего объекта состояния
-export type AppRootStateType = ReturnType<typeof rootReducer>
+  todolists: todolistsReducer,
+  tasks: tasksReducer,
+});
 
-// а это, чтобы можно было в консоли браузера обращаться к store в любой момент
-// @ts-ignore
-window.store = store;
+// store
+export const store = createStore(rootReducer, applyMiddleware(thunk));
+
+// typed hooks
+export const useAppDispatch: DispatchFunc = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+//types
+type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
+type DispatchFunc = () => AppDispatch;
