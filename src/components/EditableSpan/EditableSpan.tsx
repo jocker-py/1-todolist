@@ -1,14 +1,11 @@
-import React, { FC, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 type EditableSpanPropsType = {
   title: string;
   changeTitle: (title: string) => void;
 };
 
-export const EditableSpan: FC<EditableSpanPropsType> = ({
-  title,
-  changeTitle,
-}) => {
+const EditableSpan: FC<EditableSpanPropsType> = ({ title, changeTitle }) => {
   const [text, setText] = useState(title);
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState<null | string>(null);
@@ -45,3 +42,5 @@ export const EditableSpan: FC<EditableSpanPropsType> = ({
     </div>
   );
 };
+
+export default memo(EditableSpan);
