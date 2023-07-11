@@ -22,7 +22,7 @@ export const AddItemForm: FC<AddItemFormPropsType> = ({ addItem }) => {
     setText(e.target.value);
   };
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       <input value={text} onChange={onChangeHandler} />
       <button onClick={addItemHandler}>+</button>
     </div>
