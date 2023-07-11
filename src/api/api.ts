@@ -1,6 +1,6 @@
 import axios from "axios";
 import { TodolistType } from "../features/todolistsReducer";
-import { TaskType } from "../features/tasksReducer";
+import { TaskModelType, TaskType } from "../features/tasksReducer";
 
 const instance = axios.create();
 
@@ -13,11 +13,13 @@ export const todolistsAPI = {
     instance
       .get("todo-lists")
       .then<Array<TodolistType>>((res) => res.data)
-      .catch((err) => console.error("TodolistAPI error get : " + err.message)),
+      .catch((err) =>
+        console.error("TodolistAPI error get Todolists : " + err.message)
+      ),
 
-  updateTodolistTitle: (id: string, title: string) =>
+  updateTodolistTitle: (todolistID: string, title: string) =>
     instance
-      .put(`todo-lists/${id}`, { title })
+      .put(`todo-lists/${todolistID}`, { title })
       .then<ResponseType>((res) => res.data)
       .catch((err) =>
         console.error("TodolistAPI error put Todolist : " + err.message)
@@ -31,9 +33,9 @@ export const todolistsAPI = {
         console.error("TodolistAPI error post Todolist: " + err.message)
       ),
 
-  deleteTodolist: (id: string) =>
+  deleteTodolist: (todolistID: string) =>
     instance
-      .delete(`todo-lists/${id}`)
+      .delete(`todo-lists/${todolistID}`)
       .then<ResponseType>((res) => res.data)
       .catch((err) =>
         console.error("TodolistAPI error delete Todolist: " + err.message)
@@ -45,6 +47,30 @@ export const todolistsAPI = {
       .then<{ items: Array<TaskType> }>((res) => res.data)
       .catch((err) =>
         console.error("TodolistAPI error get Tasks : " + err.message)
+      ),
+
+  createTask: (todolistID: string, title: string) =>
+    instance
+      .post(`todo-lists/${todolistID}/tasks`, { title })
+      .then<ResponseType<{ item: TaskType }>>((res) => res.data)
+      .catch((err) =>
+        console.error("TodolistAPI error create Task : " + err.message)
+      ),
+
+  updateTaskModel: (taskID: string, todolistID: string, task: TaskModelType) =>
+    instance
+      .put(`todo-lists/${todolistID}/tasks/${taskID}`, { ...task })
+      .then<ResponseType>((res) => res.data)
+      .catch((err) =>
+        console.error("TodolistAPI error update TaskModel : " + err.message)
+      ),
+
+  deleteTask: (taskID: string, todolistID: string) =>
+    instance
+      .delete(`todo-lists/${todolistID}/tasks/${taskID}`)
+      .then<ResponseType>((res) => res.data)
+      .catch((err) =>
+        console.error("TodolistAPI error delete Task : " + err.message)
       ),
 };
 
