@@ -1,41 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../components/Header/Header";
-import { AddItemForm } from "../components/AddItemForm/AddItemForm";
-import {
-  createTodolist,
-  fetchTodolists,
-  TodolistsStateType,
-} from "../features/todolistsReducer";
-import { useAppDispatch, useAppSelector } from "../state/store";
-import Todolist from "../features/Todolist";
+import TodolistList from "../features/TodolistList/TodolistList";
+import {Login} from "../features/Login/Login";
+import { Navigate, Routes, Route } from "react-router-dom";
+
 
 function App() {
-  const dispatch = useAppDispatch();
-  const todolists = useAppSelector(
-    (state) => state.todolists
-  ) as TodolistsStateType;
-
-  const addTodolist = (title: string) => {
-    // @ts-ignore
-    dispatch(createTodolist(title));
-  };
-
-  useEffect(() => {
-    // @ts-ignore
-    dispatch(fetchTodolists());
-  }, []);
-
   return (
     <div>
       <Header />
-      <div style={{ padding: "100px" }}>
-        <AddItemForm addItem={addTodolist} />
-        <div style={{ display: "flex", gap: "20px" }}>
-          {todolists.map((tl) => (
-            <Todolist key={tl.id} todolist={tl} />
-          ))}
-        </div>
-      </div>
+      <Routes>
+        <Route path={"/"} element={<TodolistList />} />
+        <Route path={"/login"} element={<Login />} />
+        <Route path={"/404"} element={<h1>404: PAGE NOT FOUND</h1>} />
+        <Route path={"*"} element={<Navigate to={"/404"} />} />
+      </Routes>
     </div>
 
   );
