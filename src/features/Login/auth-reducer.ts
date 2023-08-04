@@ -1,15 +1,8 @@
-import { authAPI, LoginParamsType, ResultCode } from "../../api/api"
-import {
-  SetAppErrorType,
-  setAppStatus,
-  SetAppStatusType,
-} from "../../app/appReducer"
-import {
-  handleNetworkAppError,
-  handleServerAppError,
-} from "../../utils/error/error"
+import { authAPI, LoginParamsType, ResultCode } from "api/api"
+import { SetAppErrorType, setAppStatus, SetAppStatusType } from "app/appReducer"
+import { handleNetworkAppError, handleServerAppError } from "utils/error/error"
 import { clearData } from "../TodolistList/Todolist/todolistsReducer"
-import { AppDispatch, AppThunk } from "../../state/store"
+import { AppDispatch, AppThunk } from "app/store"
 
 const initialState = {
   isLoggedIn: false,
