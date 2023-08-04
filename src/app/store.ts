@@ -1,8 +1,4 @@
-import {
-  applyMiddleware,
-  combineReducers,
-  legacy_createStore as createStore,
-} from "redux"
+import { combineReducers } from "redux"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { AppActionsType, appReducer } from "./appReducer"
@@ -29,7 +25,6 @@ const rootReducer = combineReducers({
 const store = configureStore({
   reducer: rootReducer,
 })
-// const _store = createStore(rootReducer, applyMiddleware(thunk))
 
 // Types
 type RootState = ReturnType<typeof store.getState>
