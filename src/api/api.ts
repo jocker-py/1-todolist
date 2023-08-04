@@ -1,6 +1,9 @@
 import axios from "axios";
-import { TodolistType } from "../features/todolistsReducer";
-import { TaskModelType, TaskType } from "../features/tasksReducer";
+import { TodolistType } from "../features/TodolistList/Todolist/todolistsReducer";
+import {
+  TaskModelType,
+  TaskType,
+} from "../features/TodolistList/Task/tasksReducer";
 
 const instance = axios.create();
 
