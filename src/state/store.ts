@@ -6,10 +6,13 @@ import {
 import {
   TodolistActionsType,
   todolistsReducer,
-} from "../features/todolistsReducer";
+} from "../features/TodolistList/Todolist/todolistsReducer";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { TasksActionsType, tasksReducer } from "../features/tasksReducer";
+import {
+  TasksActionsType,
+  tasksReducer,
+} from "../features/TodolistList/Task/tasksReducer";
 
 // root
 const rootReducer = combineReducers({
@@ -35,4 +38,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   AppState,
   unknown,
   ActionsType
-  >;
+>;
