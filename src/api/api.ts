@@ -72,4 +72,8 @@ export type LoginParamsType = {
   captcha?: boolean;
 };
 
-
+type UserType = {
+  email: string;
+  login: string;
+  id: number;
+};
