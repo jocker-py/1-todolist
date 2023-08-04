@@ -13,15 +13,12 @@ instance.defaults.withCredentials = true;
 
 export const todolistsAPI = {
   getTodolists: () =>
-    instance
-      .get("todo-lists")
-      .then<Array<TodolistType>>((res) => res.data),
+    instance.get("todo-lists").then<Array<TodolistType>>((res) => res.data),
 
   updateTodolistTitle: (todolistID: string, title: string) =>
     instance
       .put(`todo-lists/${todolistID}`, { title })
       .then<ResponseType>((res) => res.data),
-
 
   createTodolist: (title: string) =>
     instance
@@ -59,5 +56,12 @@ export type ResponseType<T = {}> = {
   data: T;
   fieldsErrors: Array<string>;
   messages: Array<string>;
-  resultCode: 0 | 1;
+  resultCode: ResultCode;
 };
+
+export enum ResultCode {
+  OK,
+  invalid,
+  captchaError = 10,
+}
+
