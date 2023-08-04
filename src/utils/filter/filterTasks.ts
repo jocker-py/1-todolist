@@ -1,5 +1,8 @@
-import { Status, TaskDomainType } from "../../features/tasksReducer";
-import { FilterType } from "../../features/todolistsReducer";
+import {
+  Status,
+  TaskDomainType,
+} from "../../features/TodolistList/Task/tasksReducer";
+import { FilterType } from "../../features/TodolistList/Todolist/todolistsReducer";
 
 const completedTasks = (task: TaskDomainType) =>
   task.status === Status.Completed;
