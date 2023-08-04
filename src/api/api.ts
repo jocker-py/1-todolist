@@ -55,7 +55,7 @@ export const todolistsAPI = {
 };
 
 // type
-type ResponseType<T = {}> = {
+export type ResponseType<T = {}> = {
   data: T;
   fieldsErrors: Array<string>;
   messages: Array<string>;
