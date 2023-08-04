@@ -3,20 +3,20 @@ import {
   combineReducers,
   legacy_createStore as createStore,
 } from "redux";
-import {
-  TodolistActionsType,
-  todolistsReducer,
-} from "../features/TodolistList/Todolist/todolistsReducer";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { AppActionsType, appReducer } from "../app/appReducer";
 import {
   TasksActionsType,
   tasksReducer,
 } from "../features/TodolistList/Task/tasksReducer";
-import { AppActionsType, appReducer } from "../app/appReducer";
+import {
+  TodolistActionsType,
+  todolistsReducer,
+} from "../features/TodolistList/Todolist/todolistsReducer";
 import { AuthActionsType, authReducer } from "../features/Login/auth-reducer";
 
-// root
+// Root reducer
 const rootReducer = combineReducers({
   todolists: todolistsReducer,
   tasks: tasksReducer,
@@ -24,26 +24,29 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-// store
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+// Store
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
-//types
+// Types
+type RootState = ReturnType<typeof store.getState>;
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  ActionsType
+>;
+
 type ActionsType =
   | TodolistActionsType
   | TasksActionsType
   | AppActionsType
   | AuthActionsType;
-export type AppState = ReturnType<typeof store.getState>;
-export type AppDispatch = ThunkDispatch<AppState, unknown, ActionsType>;
 
-// typed hooks
+export type AppDispatch = ThunkDispatch<RootState, unknown, ActionsType>;
+
+// Typed hooks
 export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
-//: DispatchFunc = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  ActionsType
->;
+export { store };
