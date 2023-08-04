@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
-import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk"
+import thunkMiddleware,  { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { AppActionsType, appReducer } from "./appReducer"
 import {
   TasksActionsType,
@@ -24,6 +24,8 @@ const rootReducer = combineReducers({
 // Store
 const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().prepend(thunkMiddleware),
 })
 
 // Types
