@@ -13,18 +13,20 @@ import {
   TasksActionsType,
   tasksReducer,
 } from "../features/TodolistList/Task/tasksReducer";
+import {AppActionsType, appReducer} from "../app/appReducer";
 
 // root
 const rootReducer = combineReducers({
   todolists: todolistsReducer,
   tasks: tasksReducer,
+  app: appReducer,
 });
 
 // store
 export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 //types
-type ActionsType = TodolistActionsType | TasksActionsType;
+type ActionsType = TodolistActionsType | TasksActionsType | AppActionsType;
 export type AppState = ReturnType<typeof store.getState>;
 export type AppDispatch = ThunkDispatch<AppState, unknown, ActionsType>;
 
