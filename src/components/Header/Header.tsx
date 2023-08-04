@@ -1,21 +1,21 @@
-import React from "react";
-import AppBar from "@mui/material/AppBar";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { Button } from "../Button/Button";
-import LinearProgress from "@mui/material/LinearProgress";
-import { useAppDispatch, useAppSelector } from "../../state/store";
-import ErrorSnackbar from "../ErrorSnackbar/ErrorSnackbar";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { logOut } from "../../features/Login/auth-reducer";
+import React from "react"
+import AppBar from "@mui/material/AppBar"
+import AccountCircle from "@mui/icons-material/AccountCircle"
+import MenuIcon from "@mui/icons-material/Menu"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
+import { Button } from "../Button/Button"
+import LinearProgress from "@mui/material/LinearProgress"
+import { useAppDispatch, useAppSelector } from "../../state/store"
+import ErrorSnackbar from "../ErrorSnackbar/ErrorSnackbar"
+import LogoutIcon from "@mui/icons-material/Logout"
+import { logOut } from "../../features/Login/auth-reducer"
 
 const Header = () => {
-  const dispatch = useAppDispatch();
-  const { entityStatus } = useAppSelector((state) => state.app);
-  const { isLoggedIn } = useAppSelector((state) => state.auth);
-  const handleLogOut = () => dispatch(logOut());
+  const dispatch = useAppDispatch()
+  const { entityStatus } = useAppSelector((state) => state.app)
+  const { isLoggedIn } = useAppSelector((state) => state.auth)
+  const handleLogOut = () => dispatch(logOut())
   return (
     <AppBar position={"relative"} style={{ zIndex: 1 }}>
       <Toolbar>
@@ -46,7 +46,7 @@ const Header = () => {
       )}
       <ErrorSnackbar />
     </AppBar>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

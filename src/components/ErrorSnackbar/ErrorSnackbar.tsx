@@ -1,31 +1,30 @@
-import * as React from "react";
-import Stack from "@mui/material/Stack";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { setAppError } from "../../app/appReducer";
-import { useAppDispatch, useAppSelector } from "../../state/store";
+import * as React from "react"
+import Stack from "@mui/material/Stack"
+import Snackbar from "@mui/material/Snackbar"
+import MuiAlert, { AlertProps } from "@mui/material/Alert"
+import { setAppError } from "../../app/appReducer"
+import { useAppDispatch, useAppSelector } from "../../state/store"
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+  function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+  },
+)
 
 export default function CustomizedSnackbars() {
-  const dispatch = useAppDispatch();
-  const error = useAppSelector((state) => state.app.error);
+  const dispatch = useAppDispatch()
+  const error = useAppSelector((state) => state.app.error)
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
-    reason?: string
+    reason?: string,
   ) => {
     if (reason === "clickaway") {
-      return;
+      return
     }
 
-    dispatch(setAppError(null));
-  };
+    dispatch(setAppError(null))
+  }
 
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
@@ -35,5 +34,5 @@ export default function CustomizedSnackbars() {
         </Alert>
       </Snackbar>
     </Stack>
-  );
+  )
 }

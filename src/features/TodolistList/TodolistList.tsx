@@ -1,22 +1,22 @@
-import React from "react";
-import {useTodolistList} from "./useTodolistList";
-import AddItemForm from "../../components/AddItemForm/AddItemForm";
-import {List} from "../../components/List/List";
-import {TodolistDomainType} from "./Todolist/todolistsReducer";
-import Todolist from "./Todolist/Todolist";
+import React from "react"
+import { useTodolistList } from "./useTodolistList"
+import AddItemForm from "../../components/AddItemForm/AddItemForm"
+import { List } from "../../components/List/List"
+import { TodolistDomainType } from "./Todolist/todolistsReducer"
+import Todolist from "./Todolist/Todolist"
 
-import {Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom"
 
 const TodolistList = () => {
-  const {isLoading, todolists, addTodolist, isLoggedIn} = useTodolistList();
+  const { isLoading, todolists, addTodolist, isLoggedIn } = useTodolistList()
 
   if (!isLoggedIn) {
-    return <Navigate to={"/login"}/>;
+    return <Navigate to={"/login"} />
   }
 
   return (
     <div>
-      <div style={{padding: "20px"}}>
+      <div style={{ padding: "20px" }}>
         <AddItemForm
           tooltip={"Todolist"}
           addItem={addTodolist}
@@ -36,7 +36,7 @@ const TodolistList = () => {
         )}
       />
     </div>
-  );
-};
+  )
+}
 
-export default TodolistList;
+export default TodolistList

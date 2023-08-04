@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from "../../../state/store";
-import { filteredTasks } from "../../../utils/filter/filterTasks";
-import { changeTodolistFilter, TodolistDomainType } from "./todolistsReducer";
-import { createTask, TaskDomainType } from "../Task/tasksReducer";
-import { useCallback, useMemo } from "react";
+import { useAppDispatch, useAppSelector } from "../../../state/store"
+import { filteredTasks } from "../../../utils/filter/filterTasks"
+import { changeTodolistFilter, TodolistDomainType } from "./todolistsReducer"
+import { createTask, TaskDomainType } from "../Task/tasksReducer"
+import { useCallback, useMemo } from "react"
 
 export const useTodolist = ({
   id,
@@ -10,28 +10,28 @@ export const useTodolist = ({
   entityStatus,
   filter,
 }: TodolistDomainType) => {
-  const dispatch = useAppDispatch();
-  const setFilterAll = () => dispatch(changeTodolistFilter(id, "all"));
-  const setFilterActive = () => dispatch(changeTodolistFilter(id, "active"));
+  const dispatch = useAppDispatch()
+  const setFilterAll = () => dispatch(changeTodolistFilter(id, "all"))
+  const setFilterActive = () => dispatch(changeTodolistFilter(id, "active"))
   const setFilterCompleted = () =>
-    dispatch(changeTodolistFilter(id, "completed"));
+    dispatch(changeTodolistFilter(id, "completed"))
 
   let tasks = useAppSelector(
-    (state) => state.tasks[id]
-  ) as Array<TaskDomainType>;
+    (state) => state.tasks[id],
+  ) as Array<TaskDomainType>
 
   const addTask = useCallback(
     (title: string) => {
-      dispatch(createTask(id, title));
+      dispatch(createTask(id, title))
     },
-    [dispatch, id]
-  );
+    [dispatch, id],
+  )
 
   tasks = useMemo(() => {
-    return filteredTasks(tasks, filter);
-  }, [tasks, filter]);
+    return filteredTasks(tasks, filter)
+  }, [tasks, filter])
 
-  const isLoading = entityStatus === "loading";
+  const isLoading = entityStatus === "loading"
   return {
     id,
     title,
@@ -43,5 +43,5 @@ export const useTodolist = ({
     setFilterCompleted,
     setFilterActive,
     setFilterAll,
-  };
-};
+  }
+}

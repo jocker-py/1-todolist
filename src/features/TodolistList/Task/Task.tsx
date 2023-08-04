@@ -1,9 +1,9 @@
-import React, { FC, memo } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditableSpan from "../../../components/EditableSpan/EditableSpan";
-import { Button } from "../../../components/Button/Button";
-import { useTask } from "./useTask";
-import { TaskDomainType } from "./tasksReducer";
+import React, { FC, memo } from "react"
+import DeleteIcon from "@mui/icons-material/Delete"
+import EditableSpan from "../../../components/EditableSpan/EditableSpan"
+import { Button } from "../../../components/Button/Button"
+import { useTask } from "./useTask"
+import { TaskDomainType } from "./tasksReducer"
 
 const Task: FC<TaskDomainType> = (task) => {
   const {
@@ -13,7 +13,7 @@ const Task: FC<TaskDomainType> = (task) => {
     title,
     isCompleted,
     isLoading,
-  } = useTask(task);
+  } = useTask(task)
 
   return (
     <div
@@ -38,7 +38,7 @@ const Task: FC<TaskDomainType> = (task) => {
         disabled={isLoading}
       />
     </div>
-  );
-};
+  )
+}
 
-export default memo(Task);
+export default memo(Task)

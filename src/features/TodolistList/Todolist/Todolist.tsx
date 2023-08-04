@@ -1,16 +1,16 @@
-import React, { FC, memo } from "react";
-import LayersIcon from "@mui/icons-material/Layers";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import AlarmIcon from "@mui/icons-material/Alarm";
-import { Paper } from "@mui/material";
-import AddItemForm from "../../../components/AddItemForm/AddItemForm";
-import { useTodolist } from "./useTodolist";
-import Hat from "../Hat/Hat";
-import { TaskDomainType } from "../Task/tasksReducer";
-import { TodolistDomainType } from "./todolistsReducer";
-import { Button } from "../../../components/Button/Button";
-import { List } from "../../../components/List/List";
-import Task from "../Task/Task";
+import React, { FC, memo } from "react"
+import LayersIcon from "@mui/icons-material/Layers"
+import TaskAltIcon from "@mui/icons-material/TaskAlt"
+import AlarmIcon from "@mui/icons-material/Alarm"
+import { Paper } from "@mui/material"
+import AddItemForm from "../../../components/AddItemForm/AddItemForm"
+import { useTodolist } from "./useTodolist"
+import Hat from "../Hat/Hat"
+import { TaskDomainType } from "../Task/tasksReducer"
+import { TodolistDomainType } from "./todolistsReducer"
+import { Button } from "../../../components/Button/Button"
+import { List } from "../../../components/List/List"
+import Task from "../Task/Task"
 
 const Todolist: FC<TodolistDomainType> = (todolist) => {
   const {
@@ -24,7 +24,7 @@ const Todolist: FC<TodolistDomainType> = (todolist) => {
     setFilterCompleted,
     setFilterActive,
     setFilterAll,
-  } = useTodolist(todolist);
+  } = useTodolist(todolist)
 
   return (
     <Paper
@@ -69,7 +69,7 @@ const Todolist: FC<TodolistDomainType> = (todolist) => {
         />
       </div>
     </Paper>
-  );
-};
+  )
+}
 
-export default memo(Todolist);
+export default memo(Todolist)

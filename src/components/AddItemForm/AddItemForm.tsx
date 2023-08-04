@@ -1,36 +1,36 @@
-import React, { FC, memo, useState } from "react";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import { Button } from "../Button/Button";
-import { TextField } from "@mui/material";
+import React, { FC, memo, useState } from "react"
+import AddBoxIcon from "@mui/icons-material/AddBox"
+import { Button } from "../Button/Button"
+import { TextField } from "@mui/material"
 
 type AddItemFormPropsType = {
-  addItem: (title: string) => void;
-  tooltip: string;
-  disabled: boolean;
-};
+  addItem: (title: string) => void
+  tooltip: string
+  disabled: boolean
+}
 
 const AddItemForm: FC<AddItemFormPropsType> = ({
   addItem,
   tooltip,
   disabled,
 }) => {
-  const [text, setText] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [text, setText] = useState("")
+  const [error, setError] = useState<string | null>(null)
 
   const addItemHandler = () => {
     if (!text.trim().length) {
-      setError("The field is required");
+      setError("The field is required")
     }
     if (!error) {
-      addItem(text);
-      setText("");
+      addItem(text)
+      setText("")
     }
-  };
+  }
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (error) setError(null);
-    setText(e.target.value);
-  };
+    if (error) setError(null)
+    setText(e.target.value)
+  }
 
   return (
     <div style={{ display: "flex", alignItems: "flex-start" }}>
@@ -51,7 +51,7 @@ const AddItemForm: FC<AddItemFormPropsType> = ({
         disabled={disabled}
       />
     </div>
-  );
-};
+  )
+}
 
-export default memo(AddItemForm);
+export default memo(AddItemForm)

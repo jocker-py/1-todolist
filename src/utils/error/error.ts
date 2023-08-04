@@ -3,29 +3,29 @@ import {
   SetAppErrorType,
   setAppStatus,
   SetAppStatusType,
-} from "../../app/appReducer";
-import { AxiosError } from "axios";
-import { Dispatch } from "redux";
-import { ResponseType } from "../../api/api";
+} from "../../app/appReducer"
+import { AxiosError } from "axios"
+import { Dispatch } from "redux"
+import { ResponseType } from "../../api/api"
 
 export const handleServerAppError = (
   e: AxiosError,
-  dispatch: DispatchErrorType
+  dispatch: DispatchErrorType,
 ) => {
-  dispatch(setAppError(e.message));
-  dispatch(setAppStatus("failed"));
-};
+  dispatch(setAppError(e.message))
+  dispatch(setAppStatus("failed"))
+}
 
 export const handleNetworkAppError = (
   res: ResponseType,
-  dispatch: DispatchErrorType
+  dispatch: DispatchErrorType,
 ) => {
   if (res.messages.length) {
-    dispatch(setAppError(res.messages[0]));
+    dispatch(setAppError(res.messages[0]))
   } else {
-    dispatch(setAppError("Some unknown error"));
+    dispatch(setAppError("Some unknown error"))
   }
-  dispatch(setAppStatus("failed"));
-};
+  dispatch(setAppStatus("failed"))
+}
 
-type DispatchErrorType = Dispatch<SetAppStatusType | SetAppErrorType>;
+type DispatchErrorType = Dispatch<SetAppStatusType | SetAppErrorType>

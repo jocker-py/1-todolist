@@ -1,14 +1,14 @@
-import axios from "axios";
-import { TodolistType } from "../features/TodolistList/Todolist/todolistsReducer";
+import axios from "axios"
+import { TodolistType } from "../features/TodolistList/Todolist/todolistsReducer"
 import {
   TaskModelType,
   TaskType,
-} from "../features/TodolistList/Task/tasksReducer";
+} from "../features/TodolistList/Task/tasksReducer"
 
-const instance = axios.create();
+const instance = axios.create()
 
-instance.defaults.baseURL = "https://social-network.samuraijs.com/api/1.1/";
-instance.defaults.withCredentials = true;
+instance.defaults.baseURL = "https://social-network.samuraijs.com/api/1.1/"
+instance.defaults.withCredentials = true
 // instance.defaults.headers.API_KEY = "560f5741-2761-4c74-84c7-06c14a60225a";
 
 export const todolistsAPI = {
@@ -49,7 +49,7 @@ export const todolistsAPI = {
     instance
       .delete(`todo-lists/${todolistID}/tasks/${taskID}`)
       .then<ResponseType>((res) => res.data),
-};
+}
 
 export const authAPI = {
   login: (params: LoginParamsType) =>
@@ -60,15 +60,15 @@ export const authAPI = {
     instance.delete("auth/login").then<ResponseType>((res) => res.data),
   me: () =>
     instance.get("auth/me").then<ResponseType<UserType>>((res) => res.data),
-};
+}
 
 // type
 export type ResponseType<T = {}> = {
-  data: T;
-  fieldsErrors: Array<string>;
-  messages: Array<string>;
-  resultCode: ResultCode;
-};
+  data: T
+  fieldsErrors: Array<string>
+  messages: Array<string>
+  resultCode: ResultCode
+}
 
 export enum ResultCode {
   OK,
@@ -77,14 +77,14 @@ export enum ResultCode {
 }
 
 export type LoginParamsType = {
-  email: string;
-  password: string;
-  rememberMe?: boolean;
-  captcha?: boolean;
-};
+  email: string
+  password: string
+  rememberMe?: boolean
+  captcha?: boolean
+}
 
 type UserType = {
-  email: string;
-  login: string;
-  id: number;
-};
+  email: string
+  login: string
+  id: number
+}

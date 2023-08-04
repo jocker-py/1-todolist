@@ -1,28 +1,28 @@
-import React, { FC } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
+import React, { FC } from "react"
+import DeleteIcon from "@mui/icons-material/Delete"
 import {
   deleteTodolist,
   EntityStatusType,
   updateTodolistTitle,
-} from "../Todolist/todolistsReducer";
-import EditableSpan from "../../../components/EditableSpan/EditableSpan";
-import { useAppDispatch } from "../../../state/store";
-import { Button } from "../../../components/Button/Button";
+} from "../Todolist/todolistsReducer"
+import EditableSpan from "../../../components/EditableSpan/EditableSpan"
+import { useAppDispatch } from "../../../state/store"
+import { Button } from "../../../components/Button/Button"
 
 type HeadPropsType = {
-  id: string;
-  title: string;
-  entityStatus: EntityStatusType;
-};
+  id: string
+  title: string
+  entityStatus: EntityStatusType
+}
 
 const Hat: FC<HeadPropsType> = ({ id, title, entityStatus }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
   const changeTitle = (title: string) => {
-    dispatch(updateTodolistTitle(id, title));
-  };
+    dispatch(updateTodolistTitle(id, title))
+  }
   const removeTodolist = () => {
-    dispatch(deleteTodolist(id));
-  };
+    dispatch(deleteTodolist(id))
+  }
   return (
     <div
       style={{
@@ -40,7 +40,7 @@ const Hat: FC<HeadPropsType> = ({ id, title, entityStatus }) => {
         disabled={entityStatus === "loading"}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Hat;
+export default Hat
