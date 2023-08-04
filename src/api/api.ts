@@ -65,3 +65,11 @@ export enum ResultCode {
   captchaError = 10,
 }
 
+export type LoginParamsType = {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+  captcha?: boolean;
+};
+
+
