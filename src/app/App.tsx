@@ -1,11 +1,18 @@
 import React from "react";
 import Header from "../components/Header/Header";
 import TodolistList from "../features/TodolistList/TodolistList";
-import {Login} from "../features/Login/Login";
+import { Login } from "../features/Login/Login";
 import { Navigate, Routes, Route } from "react-router-dom";
-
+import { useAppSelector } from "../state/store";
+import Preloader from "../components/Preloader/Preloader";
 
 function App() {
+  const { isInitialized } = useAppSelector((state) => state.app);
+
+  if (!isInitialized) {
+    return <Preloader />;
+  }
+
   return (
     <div>
       <Header />
@@ -16,7 +23,6 @@ function App() {
         <Route path={"*"} element={<Navigate to={"/404"} />} />
       </Routes>
     </div>
-
   );
 }
 
