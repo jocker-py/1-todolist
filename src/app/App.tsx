@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Header from "../components/Header/Header";
 import { AddItemForm } from "../components/AddItemForm/AddItemForm";
 import {
   createTodolist,
@@ -25,14 +26,18 @@ function App() {
   }, []);
 
   return (
-    <div style={{ padding: "100px" }}>
-      <AddItemForm addItem={addTodolist} />
-      <div style={{ display: "flex", gap: "20px" }}>
-        {todolists.map((tl) => (
-          <Todolist key={tl.id} todolist={tl} />
-        ))}
+    <div>
+      <Header />
+      <div style={{ padding: "100px" }}>
+        <AddItemForm addItem={addTodolist} />
+        <div style={{ display: "flex", gap: "20px" }}>
+          {todolists.map((tl) => (
+            <Todolist key={tl.id} todolist={tl} />
+          ))}
+        </div>
       </div>
     </div>
+
   );
 }
 
