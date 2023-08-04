@@ -15,6 +15,7 @@ import {
   todolistsReducer,
 } from "features/TodolistList/Todolist/todolistsReducer"
 import { AuthActionsType, authReducer } from "features/Login/auth-reducer"
+import { configureStore } from "@reduxjs/toolkit"
 
 // Root reducer
 const rootReducer = combineReducers({
@@ -25,7 +26,10 @@ const rootReducer = combineReducers({
 })
 
 // Store
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const store = configureStore({
+  reducer: rootReducer,
+})
+// const _store = createStore(rootReducer, applyMiddleware(thunk))
 
 // Types
 type RootState = ReturnType<typeof store.getState>
