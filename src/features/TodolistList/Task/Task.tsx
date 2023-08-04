@@ -1,7 +1,7 @@
 import React, { FC, memo } from "react"
 import DeleteIcon from "@mui/icons-material/Delete"
-import EditableSpan from "../../../components/EditableSpan/EditableSpan"
-import { Button } from "../../../components/Button/Button"
+import EditableSpan from "components/EditableSpan/EditableSpan"
+import { Button } from "components/Button/Button"
 import { useTask } from "./useTask"
 import { TaskDomainType } from "./tasksReducer"
 
