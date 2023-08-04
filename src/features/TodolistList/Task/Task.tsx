@@ -1,18 +1,18 @@
 import React, { FC, memo } from "react";
-import { Status, TaskDomainType } from "../tasksReducer";
-import EditableSpan from "../../components/EditableSpan/EditableSpan";
-import { useTask } from "./useTask";
-import { Button } from "../../components/Button/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditableSpan from "../../../components/EditableSpan/EditableSpan";
+import { Button } from "../../../components/Button/Button";
+import { useTask } from "./useTask";
+import { TaskDomainType } from "./tasksReducer";
 
 const Task: FC<TaskDomainType> = (task) => {
   const {
-    changeTaskStatus,
-    changeTaskTitle,
+    changeStatus,
+    changeTitle,
     removeTask,
-    status,
-    entityStatus,
     title,
+    isCompleted,
+    isLoading,
   } = useTask(task);
 
   return (
@@ -25,16 +25,17 @@ const Task: FC<TaskDomainType> = (task) => {
     >
       <input
         type="checkbox"
-        checked={status === Status.Completed}
-        onChange={changeTaskStatus}
+        checked={isCompleted}
+        onChange={changeStatus}
+        disabled={isLoading}
       />
-      <EditableSpan title={title} changeTitle={changeTaskTitle} />
+      <EditableSpan title={title} changeTitle={changeTitle} />
       <Button
         onClick={removeTask}
         title={"Delete Task"}
         icon={<DeleteIcon />}
         size={"small"}
-        disabled={entityStatus === "loading"}
+        disabled={isLoading}
       />
     </div>
   );
