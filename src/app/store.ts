@@ -5,16 +5,16 @@ import {
 } from "redux"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk"
-import { AppActionsType, appReducer } from "../app/appReducer"
+import { AppActionsType, appReducer } from "./appReducer"
 import {
   TasksActionsType,
   tasksReducer,
-} from "../features/TodolistList/Task/tasksReducer"
+} from "features/TodolistList/Task/tasksReducer"
 import {
   TodolistActionsType,
   todolistsReducer,
-} from "../features/TodolistList/Todolist/todolistsReducer"
-import { AuthActionsType, authReducer } from "../features/Login/auth-reducer"
+} from "features/TodolistList/Todolist/todolistsReducer"
+import { AuthActionsType, authReducer } from "features/Login/auth-reducer"
 
 // Root reducer
 const rootReducer = combineReducers({
