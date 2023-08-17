@@ -7,10 +7,10 @@ import AddItemForm from "../../../components/AddItemForm/AddItemForm"
 import { useTodolist } from "./useTodolist"
 import Hat from "../Hat/Hat"
 import { TaskDomainType } from "../Task/tasksReducer"
-import { TodolistDomainType } from "./todolistsReducer"
-import { Button } from "../../../components/Button/Button"
-import { List } from "../../../components/List/List"
+import { Button } from "components/Button/Button"
+import { List } from "components/List/List"
 import Task from "../Task/Task"
+import { TodolistDomainType } from "features/TodolistList/Todolist/todolistsReducer"
 
 const Todolist: FC<TodolistDomainType> = (todolist) => {
   const {
