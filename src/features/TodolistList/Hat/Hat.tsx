@@ -2,12 +2,12 @@ import React, { FC } from "react"
 import DeleteIcon from "@mui/icons-material/Delete"
 import {
   deleteTodolist,
-  EntityStatusType,
   updateTodolistTitle,
-} from "../Todolist/todolistsReducer"
-import EditableSpan from "../../../components/EditableSpan/EditableSpan"
-import { useAppDispatch } from "../../../state/store"
-import { Button } from "../../../components/Button/Button"
+} from "features/TodolistList/Todolist/todolistsThunks"
+import EditableSpan from "components/EditableSpan/EditableSpan"
+import { useAppDispatch } from "app/store"
+import { Button } from "components/Button/Button"
+import { EntityStatusType } from "features/TodolistList/Todolist/todolistsReducer"
 
 type HeadPropsType = {
   id: string
