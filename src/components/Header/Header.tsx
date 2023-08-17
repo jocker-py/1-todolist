@@ -6,10 +6,10 @@ import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import { Button } from "../Button/Button"
 import LinearProgress from "@mui/material/LinearProgress"
-import { useAppDispatch, useAppSelector } from "../../state/store"
+import { useAppDispatch, useAppSelector } from "app/store"
 import ErrorSnackbar from "../ErrorSnackbar/ErrorSnackbar"
 import LogoutIcon from "@mui/icons-material/Logout"
-import { logOut } from "../../features/Login/auth-reducer"
+import { logOut } from "features/Login/auth-reducer"
 
 const Header = () => {
   const dispatch = useAppDispatch()
