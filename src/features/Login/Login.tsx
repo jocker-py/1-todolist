@@ -1,14 +1,17 @@
 import React from "react"
-import Grid from "@mui/material/Grid"
-import Checkbox from "@mui/material/Checkbox"
-import FormControl from "@mui/material/FormControl"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import FormGroup from "@mui/material/FormGroup"
-import FormLabel from "@mui/material/FormLabel"
-import TextField from "@mui/material/TextField"
-import Button from "@mui/material/Button"
+import {
+  Grid,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  TextField,
+  Button,
+} from "@mui/material"
+
 import { useFormik } from "formik"
-import { useAppDispatch, useAppSelector } from "../../state/store"
+import { useAppDispatch, useAppSelector } from "app/store"
 import { login } from "./auth-reducer"
 import { Navigate } from "react-router-dom"
 
